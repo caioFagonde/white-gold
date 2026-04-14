@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>White Gold — Global Salt Trade 2024 · Ana Júlia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════
+   ROOT & RESET
+   ═══════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:100vw;height:100vh;overflow:hidden;background:#f5f0e8;}
+:root{
+  --sand:  #f5f0e8;
+  --cream: #ede7d9;
+  --linen: #e2d9c8;
+  --bark:  #2c2620;
+  --charcoal:#3a3530;
+  --ash:   #7a706a;
+  --salt:  #ffffff;
+  --gold:  #b8922a;
+  --rust:  #8c3a22;
+  --slate: #2a3540;
+  --india: #c87840;
+  --china: #b03030;
+  --usa:   #2868a8;
+  --teal:  #2e8070;
+}
+
+/* ═══════════════════════════════════════════════════
+   SLIDE SYSTEM
+   ═══════════════════════════════════════════════════ */
+.slide{
+  position:fixed; inset:0;
+  width:100vw; height:100vh;
+  display:none;
+  font-family:'Playfair Display', Georgia, serif;
+}
+.slide.active{ display:flex; }
+.slide-fade-in{ animation: fadeSlide .55s cubic-bezier(.4,0,.2,1) both; }
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════════════════
+   EDITORIAL LAYOUT — white panel left, photo right
+   ═══════════════════════════════════════════════════ */
+.layout-split{
+  display:grid;
+  grid-template-columns: 320px 1fr;
+  width:100%; height:100%;
+}
+.layout-full{
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:center;
+  width:100%; height:100%;
+  padding:60px 80px;
+}
+.layout-wide{
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  width:100%; height:100%;
+  gap:0;
+}
+
+/* White panel (left column) */
+.panel-white{
+  background:var(--salt);
+  padding:52px 42px;
+  display:flex; flex-direction:column;
+  justify-content:center;
+  border-right:1px solid rgba(0,0,0,.08);
+  position:relative; overflow:hidden;
+}
+.panel-white::after{
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+
+/* Salt-flat photo panel (right column) — CSS gradient evocation */
+.panel-photo{
+  position:relative; overflow:hidden;
+}
+.panel-photo .photo-bg{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 30% at 50% 75%, rgba(255,255,255,.85) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 30% 20%, rgba(200,180,150,.6) 0%, transparent 60%),
+    linear-gradient(180deg, #c4a87a 0%, #d4b882 25%, #e8dcc0 45%, #f5f2ec 65%, #ffffff 80%, #e8e4dc 100%);
+}
+/* Collage squares */
+.photo-collage{
+  position:absolute; inset:0; pointer-events:none;
+}
+.col-sq{
+  position:absolute;
+  background:var(--salt);
+  border:2px solid rgba(255,255,255,.9);
+  box-shadow:0 4px 24px rgba(0,0,0,.2);
+  overflow:hidden;
+}
+/* Salt crystal texture squares */
+.sq-crystal{background:
+  repeating-linear-gradient(45deg,rgba(255,255,255,.8) 0px,rgba(255,255,255,.8) 2px,rgba(220,215,200,.4) 2px,rgba(220,215,200,.4) 6px),
+  linear-gradient(135deg, #ddd8c8, #f0ece0);}
+.sq-mineral{background:
+  repeating-radial-gradient(circle at 50% 50%,rgba(180,165,140,.6) 0px,transparent 4px,rgba(160,145,120,.3) 5px,transparent 9px),
+  linear-gradient(135deg, #b8a888, #d0c0a0);}
+.sq-brine{background:
+  linear-gradient(180deg, #4a7898 0%,#6a9ab8 30%,#8ab8c8 60%,rgba(255,255,255,.9) 80%,#f0ece4 100%);}
+.sq-pan{background:
+  repeating-linear-gradient(0deg, rgba(255,255,255,.9) 0px,rgba(255,255,255,.9) 1px, transparent 1px, transparent 8px),
+  repeating-linear-gradient(90deg, rgba(255,255,255,.9) 0px,rgba(255,255,255,.9) 1px, transparent 1px, transparent 8px),
+  linear-gradient(135deg,#e0d8c4,#f0ebe0);}
+.sq-label{
+  position:absolute; bottom:0; left:0; right:0;
+  background:rgba(0,0,0,.55); color:white;
+  font-family:'DM Mono',monospace; font-size:.42rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  padding:4px 6px; text-align:center;
+}
+
+/* ═══════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════ */
+.eyebrow{
+  font-family:'DM Mono',monospace;
+  font-size:.52rem; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--ash); margin-bottom:18px;
+}
+.h1-editorial{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  font-weight:900; line-height:.95;
+  color:var(--bark); margin-bottom:20px;
+}
+.h1-editorial em{color:var(--gold);font-style:italic;}
+.h2-panel{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.4rem,2.2vw,2rem);
+  font-weight:700; color:var(--bark);
+  line-height:1.15; margin-bottom:16px;
+}
+.h2-panel em{color:var(--gold);font-style:italic;}
+.body-serif{
+  font-family:'Playfair Display',serif;
+  font-size:.9rem; color:var(--charcoal);
+  line-height:1.75; margin-bottom:14px;
+  font-weight:400;
+}
+.mono-tag{
+  font-family:'DM Mono',monospace;
+  font-size:.48rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ash);
+}
+.rule-gold{
+  width:40px; height:2px;
+  background:var(--gold);
+  margin:18px 0;
+}
+.author-line{
+  font-family:'DM Mono',monospace;
+  font-size:.5rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ash);
+  margin-top:36px;
+}
+
+/* ═══════════════════════════════════════════════════
+   SLIDE-SPECIFIC COMPONENTS
+   ═══════════════════════════════════════════════════ */
+/* Source import rows */
+.source-list{ width:100%; }
+.src-row{
+  display:grid;
+  grid-template-columns: 1fr 60px 1fr 70px;
+  gap:10px; align-items:center;
+  padding:7px 0;
+  border-bottom:1px solid rgba(0,0,0,.07);
+  animation: rowIn .4s ease both;
+}
+@keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.src-row:last-child{border-bottom:none;}
+.src-name{font-size:.88rem;color:var(--bark);font-weight:400;}
+.src-pct{font-family:'DM Mono',monospace;font-size:.65rem;text-align:right;font-weight:400;}
+.src-bar-wrap{height:6px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden;}
+.src-bar-fill{height:100%;border-radius:3px;transition:width .8s ease;}
+.src-usd{font-family:'DM Mono',monospace;font-size:.48rem;color:var(--ash);text-align:right;}
+.others-row .src-name{font-style:italic;color:var(--ash);font-size:.82rem;}
+
+/* Stat boxes */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+.stat-box{
+  background:var(--cream); border:1px solid var(--linen);
+  border-radius:6px; padding:16px 14px; text-align:center;
+}
+.stat-big{
+  font-family:'Playfair Display',serif; font-size:1.8rem;
+  font-weight:900; line-height:1; color:var(--bark); margin-bottom:4px;
+}
+.stat-lbl{font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);}
+
+/* Global importers bar chart */
+.imp-list{width:100%;max-width:900px;}
+.imp-card{
+  display:grid;
+  grid-template-columns:180px 1fr 90px 70px;
+  gap:12px; align-items:center;
+  padding:7px 0; border-bottom:1px solid rgba(0,0,0,.07);
+}
+.imp-card:last-child{border-bottom:none;}
+.imp-name{font-size:.9rem;color:var(--bark);font-weight:500;}
+.imp-bar-wrap{height:10px;background:rgba(0,0,0,.07);border-radius:5px;overflow:hidden;}
+.imp-bar-fill{height:100%;border-radius:5px;background:var(--gold);transition:width .8s ease;}
+.imp-val{font-family:'DM Mono',monospace;font-size:.55rem;color:var(--ash);text-align:right;}
+.imp-pct{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--gold);font-weight:400;text-align:right;}
+
+/* Conclusions */
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:1100px;}
+.con-card{
+  background:var(--salt); border:1px solid var(--linen);
+  border-left:3px solid var(--gold);
+  border-radius:4px; padding:24px 22px;
+}
+.con-num{font-family:'DM Mono',monospace;font-size:2rem;color:var(--linen);font-weight:300;line-height:1;margin-bottom:8px;}
+.con-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--bark);margin-bottom:10px;}
+.con-text{font-size:.88rem;color:var(--charcoal);line-height:1.7;font-style:italic;}
+
+/* Use-case cards */
+.use-grid-e{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.use-card-e{
+  background:var(--cream); border:1px solid var(--linen);
+  border-radius:4px; padding:16px;
+}
+.use-icon{font-size:1.6rem;margin-bottom:8px;}
+.use-title{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.use-body{font-size:.85rem;color:var(--charcoal);line-height:1.55;}
+
+/* Production bars */
+.prod-bar-row{margin-bottom:12px;}
+.prod-bar-label{display:flex;justify-content:space-between;margin-bottom:4px;}
+.prod-bar-name{font-size:.88rem;color:var(--bark);}
+.prod-bar-val{font-family:'DM Mono',monospace;font-size:.62rem;color:var(--ash);}
+.prod-bar-track{height:18px;background:rgba(0,0,0,.07);border-radius:3px;overflow:hidden;}
+.prod-bar-fill{height:100%;border-radius:3px;animation:grow 1.2s ease both;transform-origin:left;}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Methods */
+.method-item{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start;}
+.method-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--linen);font-weight:900;line-height:1;flex-shrink:0;width:32px;}
+.method-title{font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px;}
+.method-body{font-size:.86rem;color:var(--charcoal);line-height:1.6;font-style:italic;}
+
+/* Agariyas facts */
+.aga-fact{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--cream);border:1px solid var(--linen);
+  border-radius:4px;padding:12px 14px;margin-bottom:10px;
+}
+.aga-icon{font-size:1.3rem;flex-shrink:0;}
+.aga-strong{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:3px;}
+.aga-body{font-size:.84rem;color:var(--charcoal);font-style:italic;line-height:1.55;}
+
+/* ═══════════════════════════════════════════════════
+   MAP SLIDE (full bleed, own layout)
+   ═══════════════════════════════════════════════════ */
+#slide-map{background:var(--slate);flex-direction:column;}
+#world-svg{
+  position:absolute; inset:0;
+  width:100% !important; height:100% !important;
+}
+.map-ui{position:absolute;inset:0;pointer-events:none;z-index:10;}
+.map-panel{
+  position:absolute; top:28px; left:28px;
+  background:rgba(255,255,255,.95); border:1px solid rgba(0,0,0,.1);
+  border-radius:4px; padding:20px 24px; min-width:220px;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.map-panel-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--bark);margin-bottom:4px;}
+.map-panel-sub{font-family:'DM Mono',monospace;font-size:.44rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);margin-bottom:16px;}
+.map-legend-item{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.map-legend-item:last-child{margin-bottom:0;}
+.map-legend-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+.map-legend-label{font-size:.84rem;color:var(--charcoal);}
+.map-stats-panel{
+  position:absolute; top:28px; right:28px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.map-stat-box{
+  background:rgba(255,255,255,.95); border:1px solid rgba(0,0,0,.1);
+  border-radius:4px; padding:12px 18px; text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.15);
+}
+.map-stat-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--bark);line-height:1;margin-bottom:4px;}
+.map-stat-lbl{font-family:'DM Mono',monospace;font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);}
+/* Tooltip */
+.map-tooltip{
+  position:fixed;z-index:200;pointer-events:none;
+  background:rgba(255,255,255,.97);
+  border:1px solid rgba(0,0,0,.12);
+  border-radius:6px; padding:14px 18px;
+  box-shadow:0 8px 32px rgba(0,0,0,.18);
+  min-width:200px; display:none;
+}
+.tip-route{font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);margin-bottom:6px;}
+.tip-val{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--bark);line-height:1;margin-bottom:4px;}
+.tip-sub{font-size:.78rem;color:var(--charcoal);font-style:italic;}
+.tip-bar{height:3px;border-radius:2px;margin-top:10px;}
+
+/* Filter buttons */
+.map-filter{
+  position:absolute; bottom:80px; left:50%; transform:translateX(-50%);
+  display:flex; gap:8px; pointer-events:auto;
+}
+.filt-btn{
+  background:rgba(255,255,255,.9);
+  border:1px solid rgba(0,0,0,.15);
+  border-radius:20px; padding:6px 16px;
+  font-family:'DM Mono',monospace;
+  font-size:.52rem; letter-spacing:.12em;
+  text-transform:uppercase; cursor:pointer;
+  transition:all .2s;
+}
+.filt-btn:hover, .filt-btn.active{
+  background:var(--bark); color:white; border-color:var(--bark);
+}
+
+/* ═══════════════════════════════════════════════════
+   NAV + PROGRESS
+   ═══════════════════════════════════════════════════ */
+.nav-bar{
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:14px; z-index:300;
+  background:rgba(255,255,255,.92); border:1px solid rgba(0,0,0,.1);
+  border-radius:40px; padding:8px 16px;
+  box-shadow:0 2px 20px rgba(0,0,0,.12);
+}
+.nav-btn{
+  background:none; border:none; color:var(--bark);
+  cursor:pointer; font-size:1rem; padding:4px 8px;
+  opacity:.6; transition:opacity .2s;
+}
+.nav-btn:hover{opacity:1;}
+.nav-btn:disabled{opacity:.2;cursor:default;}
+.dots{display:flex;gap:5px;align-items:center;}
+.dot{
+  width:5px; height:5px; border-radius:50%;
+  background:rgba(0,0,0,.2); cursor:pointer;
+  transition:all .3s;
+}
+.dot.active{background:var(--gold);transform:scale(1.5);}
+.slide-num{
+  font-family:'DM Mono',monospace; font-size:.48rem;
+  letter-spacing:.15em; color:var(--ash); min-width:36px; text-align:center;
+}
+.progress-bar{
+  position:fixed; bottom:0; left:0; width:100%; height:2px;
+  background:rgba(0,0,0,.06); z-index:300;
+}
+.progress-fill{
+  height:100%; background:var(--gold);
+  transition:width .4s ease;
+}
+</style>
+</head>
+<body>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 0 — TITLE (editorial split)
+████████████████████████████████████████████████ -->
+<div class="slide active" id="slide-0">
+  <div class="layout-split">
+
+    <div class="panel-white">
+      <div class="eyebrow">HS Chapter 25 · Global Trade · 2024</div>
+      <h1 class="h1-editorial">White<br/><em>Gold</em></h1>
+      <div class="rule-gold"></div>
+      <p class="body-serif">The Global Flux of Salt, Sulphur,<br/>Lime &amp; Cement.</p>
+      <p class="body-serif" style="color:var(--ash);font-size:.82rem;margin-top:8px;">
+        An essential mineral we cannot live without — it can be obtained in a variety of ways, some more harmful than others.
+      </p>
+      <p class="author-line">By Ana Júlia · Master's Research Presentation</p>
+    </div>
+
+    <div class="panel-photo">
+      <div class="photo-bg"></div>
+      <div class="photo-collage">
+        <!-- collage squares evoke the PDF's image style -->
+        <div class="col-sq sq-crystal" style="width:140px;height:105px;top:14%;left:20%;transform:rotate(-1.5deg)">
+          <div class="sq-label">Rock salt crystal</div></div>
+        <div class="col-sq sq-brine" style="width:72px;height:72px;top:56%;left:55%;transform:rotate(1.8deg)"></div>
+        <div class="col-sq sq-mineral" style="width:100px;height:76px;top:62%;left:14%;transform:rotate(-2deg)">
+          <div class="sq-label">Himalayan pink</div></div>
+        <div class="col-sq sq-pan" style="width:90px;height:130px;top:8%;left:64%;transform:rotate(2.5deg)">
+          <div class="sq-label">Salt pan — Gujarat</div></div>
+        <div class="col-sq" style="width:68px;height:68px;bottom:12%;right:12%;background:white;border-radius:50%;transform:rotate(-3deg);display:flex;align-items:center;justify-content:center;font-size:2.8rem;">🧂</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 1 — WHAT IS SALT
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-1">
+  <div class="layout-split">
+    <div class="panel-white">
+      <div class="eyebrow">The Commodity</div>
+      <h2 class="h2-panel">Salt</h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif">An essential mineral we cannot live without, it can be obtained in a variety of ways — some more harmful than others.</p>
+      <p class="body-serif">It is required for human and animal health — to support the nervous system and hydration retention.</p>
+      <p class="body-serif">It is used to preserve food and extend shelf-life through non-growing seasons.</p>
+      <p class="body-serif">It is a primary component of chemical manufacturing, water treatment, and weather-precaution treatment.</p>
+      <div class="mono-tag" style="margin-top:20px;">HS Chapter 25 · Includes sulphur, lime, cement</div>
+    </div>
+    <div class="panel-photo">
+      <div class="photo-bg"></div>
+      <div class="photo-collage">
+        <div class="col-sq sq-crystal" style="width:150px;height:120px;top:18%;left:25%;transform:rotate(-2deg)"><div class="sq-label">NaCl crystal structure</div></div>
+        <div class="col-sq sq-pan" style="width:110px;height:80px;top:10%;right:18%;transform:rotate(3deg)"><div class="sq-label">Solar evaporation</div></div>
+        <div class="col-sq sq-mineral" style="width:80px;height:80px;bottom:20%;left:30%;transform:rotate(-1deg)"><div class="sq-label">Pink Himalayan</div></div>
+        <div class="use-grid-e" style="position:absolute;bottom:30px;right:20px;width:260px;">
+          <div class="use-card-e"><div class="use-icon">⚗️</div><div class="use-title">Chemical</div><div class="use-body">Chlorine, soda ash, PVC feedstock</div></div>
+          <div class="use-card-e"><div class="use-icon">🧬</div><div class="use-title">Health</div><div class="use-body">Nerves, muscles, hydration</div></div>
+          <div class="use-card-e"><div class="use-icon">🍱</div><div class="use-title">Preservation</div><div class="use-body">Food shelf-life extension</div></div>
+          <div class="use-card-e"><div class="use-icon">🌨️</div><div class="use-title">De-icing</div><div class="use-body">Roads and water treatment</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 2 — PRODUCTION
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-2">
+  <div class="layout-split">
+    <div class="panel-white">
+      <div class="eyebrow">Global Production</div>
+      <h2 class="h2-panel">How the world<br/><em>produces</em> salt</h2>
+      <div class="rule-gold"></div>
+      <div class="method-item"><div class="method-num">I</div><div><span class="method-title">Solar Evaporation</span><span class="method-body">Brine pumped into shallow pans; sun evaporates the water. Gujarat's primary method — visually spectacular and labor-intensive.</span></div></div>
+      <div class="method-item"><div class="method-num">II</div><div><span class="method-title">Rock Salt Mining</span><span class="method-body">Underground deposits from ancient seas, drilled and blasted from subsurface layers.</span></div></div>
+      <div class="method-item"><div class="method-num">III</div><div><span class="method-title">Solution Mining</span><span class="method-body">Water injected underground dissolves salt; brine pumped up and processed at industrial scale.</span></div></div>
+    </div>
+    <div class="panel-photo" style="background:var(--cream);padding:48px 52px;flex-direction:column;justify-content:center;display:flex;">
+      <div class="eyebrow" style="margin-bottom:20px;">Top Producers — Annual Volume</div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇨🇳 China</span><span class="prod-bar-val">53M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:100%;background:var(--china)"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇺🇸 United States</span><span class="prod-bar-val">42M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:79%;background:var(--usa)"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇮🇳 India</span><span class="prod-bar-val">30M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:57%;background:var(--india)"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇩🇪 Germany</span><span class="prod-bar-val">15M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:28%;background:var(--slate)"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇦🇺 Australia</span><span class="prod-bar-val">14M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:26%;background:var(--teal)"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇨🇦 Canada</span><span class="prod-bar-val">13M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:24%;background:#6a80a0"></div></div>
+      </div>
+      <div class="prod-bar-row">
+        <div class="prod-bar-label"><span class="prod-bar-name">🇲🇽 Mexico</span><span class="prod-bar-val">9M t</span></div>
+        <div class="prod-bar-track"><div class="prod-bar-fill" style="width:17%;background:#7a9060"></div></div>
+      </div>
+      <p class="mono-tag" style="margin-top:24px;">Despite high domestic production, all top producers also import significant volumes of specialty minerals (HS25)</p>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 3 — GUJARAT
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-3">
+  <div class="layout-split">
+    <div class="panel-white">
+      <div class="eyebrow">Epicenter of Production</div>
+      <h2 class="h2-panel">Gujarat,<br/><em>India</em></h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif">Gujarat is the undisputed salt capital of India — a sun-scorched landscape where the Rann of Kutch stretches into white infinity.</p>
+      <div class="stat-grid">
+        <div class="stat-box"><div class="stat-big">87%</div><div class="stat-lbl">India's salt output</div></div>
+        <div class="stat-box"><div class="stat-big">1,958%</div><div class="stat-lbl">Growth 1947–2023</div></div>
+        <div class="stat-box"><div class="stat-big">39M t</div><div class="stat-lbl">Annual production 2023</div></div>
+        <div class="stat-box"><div class="stat-big">30%</div><div class="stat-lbl">Agariyas' share</div></div>
+      </div>
+      <p class="body-serif" style="margin-top:16px;font-size:.82rem;color:var(--ash);">The primary method is solar evaporation of brine — physically intense labor in harsh, hot conditions with poor compensation.</p>
+    </div>
+    <div class="panel-photo" style="background:var(--cream);display:flex;flex-direction:column;justify-content:center;padding:40px;">
+      <div class="satellite-art" style="width:100%;height:280px;border-radius:4px;overflow:hidden;border:1px solid var(--linen);box-shadow:0 4px 20px rgba(0,0,0,.1);">
+        <svg width="100%" height="100%" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a7030"/><stop offset="40%" stop-color="#6a9040"/><stop offset="70%" stop-color="#a0a848"/><stop offset="100%" stop-color="#d0c870"/></linearGradient>
+            <linearGradient id="gw" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3a6880"/><stop offset="100%" stop-color="#204858"/></linearGradient>
+          </defs>
+          <rect width="500" height="280" fill="url(#gbg)"/>
+          <rect x="20" y="20" width="80" height="46" fill="white" opacity=".92" rx="1"/>
+          <rect x="108" y="20" width="80" height="46" fill="#f5e8d0" opacity=".88" rx="1"/>
+          <rect x="196" y="20" width="80" height="46" fill="#e8d4b0" opacity=".85" rx="1"/>
+          <rect x="284" y="20" width="80" height="46" fill="#d4e8f5" opacity=".9" rx="1"/>
+          <rect x="20" y="74" width="80" height="46" fill="#e8f0d4" opacity=".85" rx="1"/>
+          <rect x="108" y="74" width="80" height="46" fill="white" opacity=".95" rx="1"/>
+          <rect x="196" y="74" width="80" height="46" fill="#f0d4c8" opacity=".82" rx="1"/>
+          <rect x="284" y="74" width="80" height="46" fill="white" opacity=".9" rx="1"/>
+          <rect x="20" y="128" width="80" height="46" fill="#d8e8f8" opacity=".88" rx="1"/>
+          <rect x="108" y="128" width="80" height="46" fill="#f8d4b0" opacity=".8" rx="1"/>
+          <rect x="196" y="128" width="80" height="46" fill="white" opacity=".93" rx="1"/>
+          <rect x="284" y="128" width="80" height="46" fill="#e8d8c0" opacity=".85" rx="1"/>
+          <rect x="20" y="182" width="80" height="46" fill="white" opacity=".9" rx="1"/>
+          <rect x="108" y="182" width="80" height="46" fill="#f0e8d4" opacity=".8" rx="1"/>
+          <rect x="196" y="182" width="80" height="46" fill="#e4dcc8" opacity=".82" rx="1"/>
+          <rect x="284" y="182" width="80" height="46" fill="#d0e8e8" opacity=".85" rx="1"/>
+          <rect x="100" y="20" width="6" height="210" fill="url(#gw)" opacity=".65"/>
+          <rect x="188" y="20" width="6" height="210" fill="url(#gw)" opacity=".65"/>
+          <rect x="276" y="20" width="6" height="210" fill="url(#gw)" opacity=".65"/>
+          <rect x="20" y="66" width="352" height="6" fill="url(#gw)" opacity=".65"/>
+          <rect x="20" y="120" width="352" height="6" fill="url(#gw)" opacity=".65"/>
+          <rect x="20" y="174" width="352" height="6" fill="url(#gw)" opacity=".65"/>
+          <rect x="380" y="10" width="110" height="260" fill="#7a8848" opacity=".55" rx="3"/>
+          <ellipse cx="435" cy="140" rx="35" ry="75" fill="#4a6028" opacity=".45"/>
+          <text x="490" y="272" text-anchor="end" fill="white" opacity=".5" font-size="9" font-family="monospace">Rann of Kutch · Sentinel-2 false-color</text>
+        </svg>
+      </div>
+      <div class="mono-tag" style="margin-top:10px;text-align:center;">White/pink = salt pans · Greens = vegetation · Blue = brine channels</div>
+      <p class="body-serif" style="margin-top:16px;font-size:.82rem;color:var(--ash);">ML object detection trained on false-color tiles to map pan extent temporally. Running trained model at landscape scale in QGIS. Temporal expansion comparison — WIP.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 4 — AGARIYAS
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-4">
+  <div class="layout-split">
+    <div class="panel-white">
+      <div class="eyebrow">The Human Dimension</div>
+      <h2 class="h2-panel">The <em>Agariyas</em></h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif" style="border-left:2px solid var(--gold);padding-left:14px;margin-bottom:18px;font-style:italic;">"They work in conditions of extreme heat, standing ankle-deep in brine for hours. The salt corrodes their skin. The sun blinds. And yet — they produce 30% of Gujarat's entire output."</p>
+      <p class="body-serif" style="font-size:.85rem;color:var(--ash);">Agariyas are traditionally nomadic communities who migrate seasonally to the salt flats. Despite fueling India's dominant global position, they remain invisible in supply chains and ESG frameworks.</p>
+    </div>
+    <div class="panel-photo" style="background:var(--cream);padding:40px 48px;display:flex;flex-direction:column;justify-content:center;">
+      <div class="aga-fact"><div class="aga-icon">🌡️</div><div><span class="aga-strong">Extreme Labor Conditions</span><span class="aga-body">45°C+ heat; brine causes severe skin and eye damage from prolonged daily exposure with no protective infrastructure</span></div></div>
+      <div class="aga-fact"><div class="aga-icon">🛰️</div><div><span class="aga-strong">Remote Sensing Mapping</span><span class="aga-body">Sentinel-2 false-color imagery to track salt pan extent and monitor Agariya settlement patterns across the Rann of Kutch</span></div></div>
+      <div class="aga-fact"><div class="aga-icon">🤖</div><div><span class="aga-strong">ML Object Detection</span><span class="aga-body">Models trained on labeled tiles to identify and classify salt pans, running at landscape scale; US South India datasets added</span></div></div>
+      <div class="aga-fact"><div class="aga-icon">📅</div><div><span class="aga-strong">Temporal Expansion</span><span class="aga-body">Historical imagery comparison reveals dramatic salt pan expansion and contraction over 3+ decades of climate variability</span></div></div>
+      <div class="aga-fact"><div class="aga-icon">⚖️</div><div><span class="aga-strong">Labor Justice Gap</span><span class="aga-body">$600M+ estimated contribution to Indian exports; structurally excluded from supply-chain transparency and fair compensation</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 5 — GLOBAL IMPORTERS (all 203 countries)
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-5">
+  <div class="layout-full" style="background:var(--sand);">
+    <div class="eyebrow">2024 Global Import Landscape · 203 importing countries</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2.2rem);color:var(--bark);margin-bottom:6px;">Who drives global <em style="color:var(--gold)">demand?</em></h2>
+    <p style="font-size:.85rem;color:var(--ash);font-style:italic;margin-bottom:24px;">Global market: $53.18B · ranked by import value</p>
+    <div class="imp-list">
+      <div class="imp-card">
+          <div class="imp-name">Australia</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:100%"></div></div>
+          <div class="imp-val">$3.48B</div>
+          <div class="imp-pct">6.55%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">United States of America</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:91%"></div></div>
+          <div class="imp-val">$3.19B</div>
+          <div class="imp-pct">6.00%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">China</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:91%"></div></div>
+          <div class="imp-val">$3.18B</div>
+          <div class="imp-pct">5.98%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Turkiye</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:83%"></div></div>
+          <div class="imp-val">$2.92B</div>
+          <div class="imp-pct">5.50%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Germany</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:65%"></div></div>
+          <div class="imp-val">$2.29B</div>
+          <div class="imp-pct">4.31%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">United Arab Emirates</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:59%"></div></div>
+          <div class="imp-val">$2.06B</div>
+          <div class="imp-pct">3.87%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">India</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:59%"></div></div>
+          <div class="imp-val">$2.06B</div>
+          <div class="imp-pct">3.87%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Spain</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:45%"></div></div>
+          <div class="imp-val">$1.58B</div>
+          <div class="imp-pct">2.98%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Canada</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:43%"></div></div>
+          <div class="imp-val">$1.53B</div>
+          <div class="imp-pct">2.88%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Vietnam</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:42%"></div></div>
+          <div class="imp-val">$1.47B</div>
+          <div class="imp-pct">2.77%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Egypt</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:41%"></div></div>
+          <div class="imp-val">$1.46B</div>
+          <div class="imp-pct">2.75%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Netherlands</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:37%"></div></div>
+          <div class="imp-val">$1.29B</div>
+          <div class="imp-pct">2.43%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">France</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:33%"></div></div>
+          <div class="imp-val">$1.16B</div>
+          <div class="imp-pct">2.18%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Italy</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:32%"></div></div>
+          <div class="imp-val">$1.15B</div>
+          <div class="imp-pct">2.15%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Morocco</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:31%"></div></div>
+          <div class="imp-val">$1.11B</div>
+          <div class="imp-pct">2.08%</div>
+        </div><div class="imp-card">
+          <div class="imp-name">Belgium</div>
+          <div class="imp-bar-wrap"><div class="imp-bar-fill" style="width:28%"></div></div>
+          <div class="imp-val">$988M</div>
+          <div class="imp-pct">1.86%</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 6 — INDIA SOURCES
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-6">
+  <div class="layout-wide">
+    <div class="panel-white" style="padding:40px 44px;">
+      <div class="eyebrow">India's Import Profile · 103 source countries</div>
+      <h2 class="h2-panel">India sources<br/>from the <em>Persian Gulf</em></h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif">Despite being a top-3 global producer of 30M tons, India imports <strong>$2.06B</strong> — primarily specialty minerals, sulphur and cement inputs from the Middle East.</p>
+      <div class="stat-grid" style="margin-top:16px;">
+        <div class="stat-box"><div class="stat-big" style="color:var(--india)">$2.06B</div><div class="stat-lbl">Total HS25 imports</div></div>
+        <div class="stat-box"><div class="stat-big">103</div><div class="stat-lbl">Source countries</div></div>
+      </div>
+    </div>
+    <div style="padding:40px 48px;background:var(--sand);overflow-y:auto;">
+      <div class="source-list">
+        
+        <div class="src-row" style="animation-delay:0.00s">
+          <div class="src-name">United Arab Emirates</div>
+          <div class="src-pct" style="color:var(--india)">18.05%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:100%;background:var(--india)"></div></div>
+          <div class="src-usd">$692M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.07s">
+          <div class="src-name">Jordan</div>
+          <div class="src-pct" style="color:var(--india)">15.60%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:86%;background:var(--india)"></div></div>
+          <div class="src-usd">$598M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.14s">
+          <div class="src-name">Togo</div>
+          <div class="src-pct" style="color:var(--india)">11.72%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:64%;background:var(--india)"></div></div>
+          <div class="src-usd">$449M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.21s">
+          <div class="src-name">Oman</div>
+          <div class="src-pct" style="color:var(--india)">7.72%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:42%;background:var(--india)"></div></div>
+          <div class="src-usd">$296M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.28s">
+          <div class="src-name">Morocco</div>
+          <div class="src-pct" style="color:var(--india)">7.48%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:41%;background:var(--india)"></div></div>
+          <div class="src-usd">$287M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.35s">
+          <div class="src-name">China</div>
+          <div class="src-pct" style="color:var(--india)">5.31%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:29%;background:var(--india)"></div></div>
+          <div class="src-usd">$204M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.42s">
+          <div class="src-name">Turkiye</div>
+          <div class="src-pct" style="color:var(--india)">4.15%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:22%;background:var(--india)"></div></div>
+          <div class="src-usd">$159M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.49s">
+          <div class="src-name">Egypt</div>
+          <div class="src-pct" style="color:var(--india)">3.93%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:21%;background:var(--india)"></div></div>
+          <div class="src-usd">$151M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.56s">
+          <div class="src-name">South Africa</div>
+          <div class="src-pct" style="color:var(--india)">2.50%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:13%;background:var(--india)"></div></div>
+          <div class="src-usd">$96M</div>
+        </div>
+        <div class="src-row others-row">
+          <div class="src-name">+ 94 other countries</div>
+          <div class="src-pct" style="color:var(--india)">23.5%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:130%;background:rgba(0,0,0,.15)"></div></div>
+          <div class="src-usd"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 7 — CHINA SOURCES
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-7">
+  <div class="layout-wide">
+    <div class="panel-white" style="padding:40px 44px;">
+      <div class="eyebrow">China's Import Profile · 139 source countries</div>
+      <h2 class="h2-panel">China's <em>Australian</em><br/>dependency</h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif">Despite producing 53M tons annually, China imports <strong>$3.18B</strong>. Australia alone accounts for over a third — a structural dependency that persists despite diplomatic tensions.</p>
+      <div class="stat-grid" style="margin-top:16px;">
+        <div class="stat-box"><div class="stat-big" style="color:var(--china)">$3.18B</div><div class="stat-lbl">Total HS25 imports</div></div>
+        <div class="stat-box"><div class="stat-big">139</div><div class="stat-lbl">Source countries</div></div>
+      </div>
+    </div>
+    <div style="padding:40px 48px;background:var(--sand);overflow-y:auto;">
+      <div class="source-list">
+        
+        <div class="src-row" style="animation-delay:0.00s">
+          <div class="src-name">Australia</div>
+          <div class="src-pct" style="color:var(--china)">34.72%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:100%;background:var(--china)"></div></div>
+          <div class="src-usd">$2.94B</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.07s">
+          <div class="src-name">India</div>
+          <div class="src-pct" style="color:var(--china)">9.93%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:28%;background:var(--china)"></div></div>
+          <div class="src-usd">$842M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.14s">
+          <div class="src-name">United States of America</div>
+          <div class="src-pct" style="color:var(--china)">7.08%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:20%;background:var(--china)"></div></div>
+          <div class="src-usd">$600M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.21s">
+          <div class="src-name">Turkiye</div>
+          <div class="src-pct" style="color:var(--china)">6.14%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:17%;background:var(--china)"></div></div>
+          <div class="src-usd">$521M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.28s">
+          <div class="src-name">Brazil</div>
+          <div class="src-pct" style="color:var(--china)">6.03%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:17%;background:var(--china)"></div></div>
+          <div class="src-usd">$511M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.35s">
+          <div class="src-name">Italy</div>
+          <div class="src-pct" style="color:var(--china)">2.99%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:8%;background:var(--china)"></div></div>
+          <div class="src-usd">$254M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.42s">
+          <div class="src-name">Zimbabwe</div>
+          <div class="src-pct" style="color:var(--china)">2.71%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:7%;background:var(--china)"></div></div>
+          <div class="src-usd">$229M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.49s">
+          <div class="src-name">United Arab Emirates</div>
+          <div class="src-pct" style="color:var(--china)">2.55%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:7%;background:var(--china)"></div></div>
+          <div class="src-usd">$216M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.56s">
+          <div class="src-name">Greece</div>
+          <div class="src-pct" style="color:var(--china)">2.00%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:5%;background:var(--china)"></div></div>
+          <div class="src-usd">$170M</div>
+        </div>
+        <div class="src-row others-row">
+          <div class="src-name">+ 130 other countries</div>
+          <div class="src-pct" style="color:var(--china)">25.8%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:74%;background:rgba(0,0,0,.15)"></div></div>
+          <div class="src-usd"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 8 — USA SOURCES
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-8">
+  <div class="layout-wide">
+    <div class="panel-white" style="padding:40px 44px;">
+      <div class="eyebrow">USA's Import Profile · 117 source countries</div>
+      <h2 class="h2-panel">USA's <em>diversified</em><br/>supply chain</h2>
+      <div class="rule-gold"></div>
+      <p class="body-serif">The United States imports <strong>$3.19B</strong> in HS25 goods. Canada dominates by proximity, but Türkiye commands 10% from across the Atlantic — a geopolitically significant corridor.</p>
+      <div class="stat-grid" style="margin-top:16px;">
+        <div class="stat-box"><div class="stat-big" style="color:var(--usa)">$3.19B</div><div class="stat-lbl">Total HS25 imports</div></div>
+        <div class="stat-box"><div class="stat-big">117</div><div class="stat-lbl">Source countries</div></div>
+      </div>
+    </div>
+    <div style="padding:40px 48px;background:var(--sand);overflow-y:auto;">
+      <div class="source-list">
+        
+        <div class="src-row" style="animation-delay:0.00s">
+          <div class="src-name">Canada</div>
+          <div class="src-pct" style="color:var(--usa)">29.55%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:100%;background:var(--usa)"></div></div>
+          <div class="src-usd">$1.31B</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.07s">
+          <div class="src-name">Turkiye</div>
+          <div class="src-pct" style="color:var(--usa)">10.20%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:34%;background:var(--usa)"></div></div>
+          <div class="src-usd">$451M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.14s">
+          <div class="src-name">Mexico</div>
+          <div class="src-pct" style="color:var(--usa)">8.22%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:27%;background:var(--usa)"></div></div>
+          <div class="src-usd">$364M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.21s">
+          <div class="src-name">Peru</div>
+          <div class="src-pct" style="color:var(--usa)">7.63%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:25%;background:var(--usa)"></div></div>
+          <div class="src-usd">$338M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.28s">
+          <div class="src-name">Vietnam</div>
+          <div class="src-pct" style="color:var(--usa)">6.60%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:22%;background:var(--usa)"></div></div>
+          <div class="src-usd">$292M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.35s">
+          <div class="src-name">China</div>
+          <div class="src-pct" style="color:var(--usa)">4.78%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:16%;background:var(--usa)"></div></div>
+          <div class="src-usd">$211M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.42s">
+          <div class="src-name">Spain</div>
+          <div class="src-pct" style="color:var(--usa)">2.59%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:8%;background:var(--usa)"></div></div>
+          <div class="src-usd">$115M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.49s">
+          <div class="src-name">Greece</div>
+          <div class="src-pct" style="color:var(--usa)">2.51%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:8%;background:var(--usa)"></div></div>
+          <div class="src-usd">$111M</div>
+        </div>
+        <div class="src-row" style="animation-delay:0.56s">
+          <div class="src-name">India</div>
+          <div class="src-pct" style="color:var(--usa)">2.07%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:7%;background:var(--usa)"></div></div>
+          <div class="src-usd">$92M</div>
+        </div>
+        <div class="src-row others-row">
+          <div class="src-name">+ 108 other countries</div>
+          <div class="src-pct" style="color:var(--usa)">25.8%</div>
+          <div class="src-bar-wrap"><div class="src-bar-fill" style="width:87%;background:rgba(0,0,0,.15)"></div></div>
+          <div class="src-usd"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 9 — MAP (all countries + all arcs)
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-map">
+  <svg id="world-svg"></svg>
+  <div class="map-ui">
+    <div class="map-panel">
+      <div class="map-panel-title">The World's Salt Routes</div>
+      <div class="map-panel-sub">HS Chapter 25 · 2024 · 203 nations</div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:var(--india)"></div><div class="map-legend-label">India — $2.06B</div></div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:var(--china)"></div><div class="map-legend-label">China — $3.18B</div></div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:var(--usa)"></div><div class="map-legend-label">USA — $3.19B</div></div>
+      <div class="map-legend-item"><div class="map-legend-dot" style="background:rgba(0,0,0,.35)"></div><div class="map-legend-label">Other importers</div></div>
+    </div>
+    <div class="map-stats-panel">
+      <div class="map-stat-box"><div class="map-stat-val">$53.18B</div><div class="map-stat-lbl">Global Market</div></div>
+      <div class="map-stat-box"><div class="map-stat-val">203</div><div class="map-stat-lbl">Importing Nations</div></div>
+    </div>
+    <div class="map-filter">
+      <button class="filt-btn active" onclick="filterArcs('all')">All routes</button>
+      <button class="filt-btn" onclick="filterArcs('india')">→ India</button>
+      <button class="filt-btn" onclick="filterArcs('china')">→ China</button>
+      <button class="filt-btn" onclick="filterArcs('usa')">→ USA</button>
+    </div>
+  </div>
+  <div class="map-tooltip" id="map-tooltip">
+    <div class="tip-route" id="tip-route"></div>
+    <div class="tip-val" id="tip-val"></div>
+    <div class="tip-sub" id="tip-sub"></div>
+    <div class="tip-bar" id="tip-bar"></div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 10 — CONCLUSIONS
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-10">
+  <div class="layout-full" style="background:var(--sand);">
+    <div class="eyebrow" style="margin-bottom:16px;">Research Synthesis</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);color:var(--bark);margin-bottom:28px;">Key <em style="color:var(--gold)">Findings</em></h2>
+    <div class="con-grid">
+      <div class="con-card"><div class="con-num">01</div><div class="con-title">Türkiye as Global Fulcrum</div><p class="con-text">Simultaneous supply to the US (10.2%), China (6.1%), and India (4.2%) positions Türkiye as a uniquely multilateral pivot in global mineral trade — a geopolitical asset rarely examined.</p></div>
+      <div class="con-card"><div class="con-num">02</div><div class="con-title">India's Production Paradox</div><p class="con-text">India produces 30M tons yet imports $2.06B from 103 countries. Gujarat's production miracle conceals structural dependencies in downstream value chains.</p></div>
+      <div class="con-card"><div class="con-num">03</div><div class="con-title">China–Australia Entanglement</div><p class="con-text">Australia supplies 34.7% of China's HS25 imports despite diplomatic tensions. This dependency is both a strategic vulnerability and a bilateral negotiating lever.</p></div>
+      <div class="con-card"><div class="con-num">04</div><div class="con-title">Labor Invisibility</div><p class="con-text">The Agariyas produce 30% of Gujarat's salt — $600M+ contribution — yet remain excluded from supply-chain transparency, ESG reporting, and fair compensation globally.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████████████████████████████████████████
+     SLIDE 11 — FINAL
+████████████████████████████████████████████████ -->
+<div class="slide" id="slide-11">
+  <div class="layout-split">
+    <div class="panel-white" style="justify-content:flex-end;padding-bottom:60px;">
+      <div class="eyebrow">Thank You</div>
+      <h1 class="h1-editorial" style="font-size:clamp(2.5rem,5vw,4.5rem);">White<br/><em>Gold</em></h1>
+      <div class="rule-gold"></div>
+      <p class="body-serif" style="font-style:italic;color:var(--ash);">From the salt flats of Gujarat to the shipping lanes of the Indo-Pacific — salt continues to structure global geopolitics, labor conditions, and industrial supply chains in ways that remain profoundly underexamined.</p>
+      <div class="author-line" style="margin-top:32px;border-top:1px solid var(--linen);padding-top:20px;">
+        Ana Júlia · Master's Research Presentation<br/>
+        Global Commodity Flows · HS Chapter 25 · 2024<br/>
+        <span style="margin-top:6px;display:block;color:rgba(0,0,0,.3);">Data: UN Comtrade · OEC World · Sentinel-2 · Salt Commissioner of India</span>
+      </div>
+    </div>
+    <div class="panel-photo">
+      <div class="photo-bg"></div>
+      <div class="photo-collage">
+        <div class="col-sq sq-pan" style="width:160px;height:120px;top:12%;left:18%;transform:rotate(-2deg)"><div class="sq-label">Rann of Kutch</div></div>
+        <div class="col-sq sq-crystal" style="width:100px;height:100px;top:42%;left:54%;transform:rotate(2.5deg)"><div class="sq-label">NaCl crystal</div></div>
+        <div class="col-sq sq-brine" style="width:80px;height:80px;bottom:22%;left:22%;transform:rotate(-1.5deg)"></div>
+        <div class="col-sq sq-mineral" style="width:70px;height:100px;top:8%;right:14%;transform:rotate(3deg)"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ NAV ════ -->
+<nav class="nav-bar" id="nav-bar">
+  <button class="nav-btn" id="btn-prev" onclick="go(cur-1)">&#8592;</button>
+  <div class="dots" id="dots"></div>
+  <span class="slide-num" id="slide-num">1 / 12</span>
+  <button class="nav-btn" id="btn-next" onclick="go(cur+1)">&#8594;</button>
+</nav>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<!-- ════ D3 + TOPO ════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════
+// DATA (injected by generate.py)
+// ═══════════════════════════════════════════════════
+const ALL_ARCS = [{"from": [53.8, 23.4], "to": [78.9, 20.6], "name": "United Arab Emirates", "pct": 18.0501, "usd": 691881512, "country": "india"}, {"from": [36.2, 31.2], "to": [78.9, 20.6], "name": "Jordan", "pct": 15.604, "usd": 598120023, "country": "india"}, {"from": [0.8, 8.6], "to": [78.9, 20.6], "name": "Togo", "pct": 11.7184, "usd": 449179710, "country": "india"}, {"from": [57.6, 21.5], "to": [78.9, 20.6], "name": "Oman", "pct": 7.7201, "usd": 295921592, "country": "india"}, {"from": [-7.1, 31.8], "to": [78.9, 20.6], "name": "Morocco", "pct": 7.4795, "usd": 286697299, "country": "india"}, {"from": [104.2, 35.9], "to": [78.9, 20.6], "name": "China", "pct": 5.3114, "usd": 203591884, "country": "india"}, {"from": [35.2, 38.9], "to": [78.9, 20.6], "name": "Turkiye", "pct": 4.1512, "usd": 159120737, "country": "india"}, {"from": [30.8, 26.8], "to": [78.9, 20.6], "name": "Egypt", "pct": 3.9337, "usd": 150784844, "country": "india"}, {"from": [25.1, -29.0], "to": [78.9, 20.6], "name": "South Africa", "pct": 2.5019, "usd": 95899991, "country": "india"}, {"from": [105.3, 61.5], "to": [78.9, 20.6], "name": "Russia", "pct": 2.1644, "usd": 82965739, "country": "india"}, {"from": [2.6, 28.0], "to": [78.9, 20.6], "name": "Algeria", "pct": 2.0995, "usd": 80478174, "country": "india"}, {"from": [90.4, 27.5], "to": [78.9, 20.6], "name": "Bhutan", "pct": 1.9568, "usd": 75008395, "country": "india"}, {"from": [-51.9, -14.2], "to": [78.9, 20.6], "name": "Brazil", "pct": 1.9322, "usd": 74061856, "country": "india"}, {"from": [-98.0, 38.0], "to": [78.9, 20.6], "name": "United States of America", "pct": 1.8617, "usd": 71360674, "country": "india"}, {"from": [12.6, 42.8], "to": [78.9, 20.6], "name": "Italy", "pct": 1.3724, "usd": 52606383, "country": "india"}, {"from": [53.7, 32.4], "to": [78.9, 20.6], "name": "Iran", "pct": 1.1866, "usd": 45482649, "country": "india"}, {"from": [38.3, 35.0], "to": [78.9, 20.6], "name": "Syria", "pct": 0.9976, "usd": 38239769, "country": "india"}, {"from": [108.3, 14.1], "to": [78.9, 20.6], "name": "Vietnam", "pct": 0.9253, "usd": 35468962, "country": "india"}, {"from": [-14.5, 14.5], "to": [78.9, 20.6], "name": "Senegal", "pct": 0.7126, "usd": 27313474, "country": "india"}, {"from": [35.9, 33.9], "to": [78.9, 20.6], "name": "Lebanon", "pct": 0.703, "usd": 26947116, "country": "india"}, {"from": [101.0, 15.9], "to": [78.9, 20.6], "name": "Thailand", "pct": 0.6661, "usd": 25533554, "country": "india"}, {"from": [109.7, 4.2], "to": [78.9, 20.6], "name": "Malaysia", "pct": 0.633, "usd": 24264883, "country": "india"}, {"from": [-1.2, 52.5], "to": [78.9, 20.6], "name": "United Kingdom", "pct": 0.5511, "usd": 21124055, "country": "india"}, {"from": [84.1, 28.4], "to": [78.9, 20.6], "name": "Nepal", "pct": 0.5501, "usd": 21085929, "country": "india"}, {"from": [-3.7, 40.4], "to": [78.9, 20.6], "name": "Spain", "pct": 0.4902, "usd": 18788156, "country": "india"}, {"from": [133.8, -25.3], "to": [78.9, 20.6], "name": "Australia", "pct": 0.4323, "usd": 16571052, "country": "india"}, {"from": [45.1, 23.9], "to": [78.9, 20.6], "name": "Saudi Arabia", "pct": 0.3554, "usd": 13623792, "country": "india"}, {"from": [90.4, 23.7], "to": [78.9, 20.6], "name": "Bangladesh", "pct": 0.3238, "usd": 12412024, "country": "india"}, {"from": [21.8, 39.1], "to": [78.9, 20.6], "name": "Greece", "pct": 0.3014, "usd": 11552122, "country": "india"}, {"from": [133.8, -25.3], "to": [104.2, 35.9], "name": "Australia", "pct": 34.7181, "usd": 2942822736, "country": "china"}, {"from": [78.9, 20.6], "to": [104.2, 35.9], "name": "India", "pct": 9.9327, "usd": 841929275, "country": "china"}, {"from": [-98.0, 38.0], "to": [104.2, 35.9], "name": "United States of America", "pct": 7.0798, "usd": 600104476, "country": "china"}, {"from": [35.2, 38.9], "to": [104.2, 35.9], "name": "Turkiye", "pct": 6.1411, "usd": 520540948, "country": "china"}, {"from": [-51.9, -14.2], "to": [104.2, 35.9], "name": "Brazil", "pct": 6.03, "usd": 511123146, "country": "china"}, {"from": [12.6, 42.8], "to": [104.2, 35.9], "name": "Italy", "pct": 2.9912, "usd": 253546899, "country": "china"}, {"from": [29.9, -19.0], "to": [104.2, 35.9], "name": "Zimbabwe", "pct": 2.7074, "usd": 229489466, "country": "china"}, {"from": [53.8, 23.4], "to": [104.2, 35.9], "name": "United Arab Emirates", "pct": 2.5539, "usd": 216476833, "country": "china"}, {"from": [21.8, 39.1], "to": [104.2, 35.9], "name": "Greece", "pct": 2.0046, "usd": 169912749, "country": "china"}, {"from": [103.8, 46.9], "to": [104.2, 35.9], "name": "Mongolia", "pct": 1.8781, "usd": 159196460, "country": "china"}, {"from": [53.7, 32.4], "to": [104.2, 35.9], "name": "Iran", "pct": 1.6362, "usd": 138686972, "country": "china"}, {"from": [105.3, 61.5], "to": [104.2, 35.9], "name": "Russia", "pct": 1.4931, "usd": 126556763, "country": "china"}, {"from": [127.8, 36.5], "to": [104.2, 35.9], "name": "South Korea", "pct": 1.4078, "usd": 119329597, "country": "china"}, {"from": [138.3, 36.2], "to": [104.2, 35.9], "name": "Japan", "pct": 1.3, "usd": 110189521, "country": "china"}, {"from": [35.5, -18.7], "to": [104.2, 35.9], "name": "Mozambique", "pct": 1.2581, "usd": 106643337, "country": "china"}, {"from": [25.1, -29.0], "to": [104.2, 35.9], "name": "South Africa", "pct": 1.0285, "usd": 87180149, "country": "china"}, {"from": [-96.8, 56.1], "to": [104.2, 35.9], "name": "Canada", "pct": 1.0267, "usd": 87023813, "country": "china"}, {"from": [8.5, 60.5], "to": [104.2, 35.9], "name": "Norway", "pct": 0.8702, "usd": 73764480, "country": "china"}, {"from": [-8.2, 39.4], "to": [104.2, 35.9], "name": "Portugal", "pct": 0.7508, "usd": 63640325, "country": "china"}, {"from": [36.2, 31.2], "to": [104.2, 35.9], "name": "Jordan", "pct": 0.7499, "usd": 63561305, "country": "china"}, {"from": [113.9, -0.8], "to": [104.2, 35.9], "name": "Indonesia", "pct": 0.7199, "usd": 61017731, "country": "china"}, {"from": [104.9, 12.6], "to": [104.2, 35.9], "name": "Cambodia", "pct": 0.696, "usd": 58994733, "country": "china"}, {"from": [109.7, 4.2], "to": [104.2, 35.9], "name": "Malaysia", "pct": 0.6755, "usd": 57258006, "country": "china"}, {"from": [57.6, 21.5], "to": [104.2, 35.9], "name": "Oman", "pct": 0.6455, "usd": 54715416, "country": "china"}, {"from": [108.3, 14.1], "to": [104.2, 35.9], "name": "Vietnam", "pct": 0.63, "usd": 53401268, "country": "china"}, {"from": [25.5, 42.7], "to": [104.2, 35.9], "name": "Bulgaria", "pct": 0.5786, "usd": 49047470, "country": "china"}, {"from": [120.9, 23.7], "to": [104.2, 35.9], "name": "Taiwan", "pct": 0.5558, "usd": 47111708, "country": "china"}, {"from": [46.9, -18.8], "to": [104.2, 35.9], "name": "Madagascar", "pct": 0.5018, "usd": 42535728, "country": "china"}, {"from": [47.5, 29.3], "to": [104.2, 35.9], "name": "Kuwait", "pct": 0.4979, "usd": 42204490, "country": "china"}, {"from": [69.3, 30.4], "to": [104.2, 35.9], "name": "Pakistan", "pct": 0.4922, "usd": 41720073, "country": "china"}, {"from": [30.8, 26.8], "to": [104.2, 35.9], "name": "Egypt", "pct": 0.4402, "usd": 37308720, "country": "china"}, {"from": [21.7, 41.6], "to": [104.2, 35.9], "name": "North Macedonia", "pct": 0.4311, "usd": 36541205, "country": "china"}, {"from": [10.5, 51.2], "to": [104.2, 35.9], "name": "Germany", "pct": 0.4246, "usd": 35986649, "country": "china"}, {"from": [101.0, 15.9], "to": [104.2, 35.9], "name": "Thailand", "pct": 0.418, "usd": 35433312, "country": "china"}, {"from": [-96.8, 56.1], "to": [-98.0, 39.0], "name": "Canada", "pct": 29.5526, "usd": 1307895990, "country": "usa"}, {"from": [35.2, 38.9], "to": [-98.0, 39.0], "name": "Turkiye", "pct": 10.1973, "usd": 451297427, "country": "usa"}, {"from": [-102.5, 23.6], "to": [-98.0, 39.0], "name": "Mexico", "pct": 8.2231, "usd": 363927511, "country": "usa"}, {"from": [-75.0, -9.2], "to": [-98.0, 39.0], "name": "Peru", "pct": 7.6333, "usd": 337822608, "country": "usa"}, {"from": [108.3, 14.1], "to": [-98.0, 39.0], "name": "Vietnam", "pct": 6.5951, "usd": 291876314, "country": "usa"}, {"from": [104.2, 35.9], "to": [-98.0, 39.0], "name": "China", "pct": 4.7786, "usd": 211484301, "country": "usa"}, {"from": [-3.7, 40.4], "to": [-98.0, 39.0], "name": "Spain", "pct": 2.591, "usd": 114669063, "country": "usa"}, {"from": [21.8, 39.1], "to": [-98.0, 39.0], "name": "Greece", "pct": 2.5074, "usd": 110966607, "country": "usa"}, {"from": [78.9, 20.6], "to": [-98.0, 39.0], "name": "India", "pct": 2.0731, "usd": 91748652, "country": "usa"}, {"from": [2.2, 46.2], "to": [-98.0, 39.0], "name": "France", "pct": 1.9222, "usd": 85071863, "country": "usa"}, {"from": [69.3, 30.4], "to": [-98.0, 39.0], "name": "Pakistan", "pct": 1.5774, "usd": 69809243, "country": "usa"}, {"from": [2.6, 28.0], "to": [-98.0, 39.0], "name": "Algeria", "pct": 1.5611, "usd": 69088338, "country": "usa"}, {"from": [-74.3, 4.6], "to": [-98.0, 39.0], "name": "Colombia", "pct": 1.5285, "usd": 67644969, "country": "usa"}, {"from": [53.8, 23.4], "to": [-98.0, 39.0], "name": "United Arab Emirates", "pct": 1.4808, "usd": 65535724, "country": "usa"}, {"from": [-71.5, -35.7], "to": [-98.0, 39.0], "name": "Chile", "pct": 1.359, "usd": 60146301, "country": "usa"}, {"from": [12.6, 42.8], "to": [-98.0, 39.0], "name": "Italy", "pct": 1.2744, "usd": 56399930, "country": "usa"}, {"from": [-51.9, -14.2], "to": [-98.0, 39.0], "name": "Brazil", "pct": 1.1334, "usd": 50160909, "country": "usa"}, {"from": [25.1, -29.0], "to": [-98.0, 39.0], "name": "South Africa", "pct": 1.0963, "usd": 48518499, "country": "usa"}, {"from": [30.8, 26.8], "to": [-98.0, 39.0], "name": "Egypt", "pct": 1.0399, "usd": 46023568, "country": "usa"}, {"from": [127.8, 36.5], "to": [-98.0, 39.0], "name": "South Korea", "pct": 0.9888, "usd": 43759874, "country": "usa"}, {"from": [101.0, 15.9], "to": [-98.0, 39.0], "name": "Thailand", "pct": 0.9806, "usd": 43398897, "country": "usa"}, {"from": [-77.4, 25.0], "to": [-98.0, 39.0], "name": "The Bahamas", "pct": 0.9373, "usd": 41483559, "country": "usa"}, {"from": [34.9, 31.5], "to": [-98.0, 39.0], "name": "Israel", "pct": 0.7985, "usd": 35337377, "country": "usa"}, {"from": [45.1, 23.9], "to": [-98.0, 39.0], "name": "Saudi Arabia", "pct": 0.7326, "usd": 32420601, "country": "usa"}, {"from": [-7.1, 31.8], "to": [-98.0, 39.0], "name": "Morocco", "pct": 0.7036, "usd": 31138728, "country": "usa"}, {"from": [5.3, 52.1], "to": [-98.0, 39.0], "name": "Netherlands", "pct": 0.6933, "usd": 30685235, "country": "usa"}, {"from": [-86.2, 15.2], "to": [-98.0, 39.0], "name": "Honduras", "pct": 0.619, "usd": 27395532, "country": "usa"}, {"from": [-1.2, 52.5], "to": [-98.0, 39.0], "name": "United Kingdom", "pct": 0.5406, "usd": 23926027, "country": "usa"}, {"from": [138.3, 36.2], "to": [-98.0, 39.0], "name": "Japan", "pct": 0.5324, "usd": 23562390, "country": "usa"}, {"from": [19.1, 52.1], "to": [-98.0, 39.0], "name": "Poland", "pct": 0.494, "usd": 21863772, "country": "usa"}, {"from": [10.5, 51.2], "to": [-98.0, 39.0], "name": "Germany", "pct": 0.4499, "usd": 19911288, "country": "usa"}, {"from": [133.8, -25.3], "to": [-98.0, 39.0], "name": "Australia", "pct": 0.4434, "usd": 19624762, "country": "usa"}, {"from": [102.5, 17.9], "to": [-98.0, 39.0], "name": "Laos", "pct": 0.4313, "usd": 19085875, "country": "usa"}];
+const ALL_IMPORTERS = [{"name": "Australia", "gross": 3483157190, "share": 6.5497, "lon": 133.8, "lat": -25.3}, {"name": "United States of America", "gross": 3189113029, "share": 5.9968, "lon": -98.0, "lat": 38.0}, {"name": "China", "gross": 3182172391, "share": 5.9838, "lon": 104.2, "lat": 35.9}, {"name": "Turkiye", "gross": 2923506002, "share": 5.4974, "lon": 35.2, "lat": 38.9}, {"name": "Germany", "gross": 2292571121, "share": 4.311, "lon": 10.5, "lat": 51.2}, {"name": "United Arab Emirates", "gross": 2060289682, "share": 3.8742, "lon": 53.8, "lat": 23.4}, {"name": "India", "gross": 2057931190, "share": 3.8697, "lon": 78.9, "lat": 20.6}, {"name": "Spain", "gross": 1582203540, "share": 2.9752, "lon": -3.7, "lat": 40.4}, {"name": "Canada", "gross": 1530522745, "share": 2.878, "lon": -96.8, "lat": 56.1}, {"name": "Vietnam", "gross": 1470979340, "share": 2.766, "lon": 108.3, "lat": 14.1}, {"name": "Egypt", "gross": 1460494345, "share": 2.7463, "lon": 30.8, "lat": 26.8}, {"name": "Netherlands", "gross": 1292544761, "share": 2.4305, "lon": 5.3, "lat": 52.1}, {"name": "France", "gross": 1160676244, "share": 2.1825, "lon": 2.2, "lat": 46.2}, {"name": "Italy", "gross": 1145901183, "share": 2.1548, "lon": 12.6, "lat": 42.8}, {"name": "Morocco", "gross": 1106179737, "share": 2.0801, "lon": -7.1, "lat": 31.8}, {"name": "Belgium", "gross": 988282466, "share": 1.8584, "lon": 4.5, "lat": 50.5}, {"name": "Brazil", "gross": 987582334, "share": 1.8571, "lon": -51.9, "lat": -14.2}, {"name": "Jordan", "gross": 849958178, "share": 1.5983, "lon": 36.2, "lat": 31.2}, {"name": "South Africa", "gross": 793062498, "share": 1.4913, "lon": 25.1, "lat": -29.0}, {"name": "Russia", "gross": 681834950, "share": 1.2821, "lon": 105.3, "lat": 61.5}, {"name": "Thailand", "gross": 672307393, "share": 1.2642, "lon": 101.0, "lat": 15.9}, {"name": "Togo", "gross": 645342935, "share": 1.2135, "lon": 0.8, "lat": 8.6}, {"name": "Mexico", "gross": 644877218, "share": 1.2126, "lon": -102.5, "lat": 23.6}, {"name": "Greece", "gross": 630433564, "share": 1.1855, "lon": 21.8, "lat": 39.1}, {"name": "Japan", "gross": 622640520, "share": 1.1708, "lon": 138.3, "lat": 36.2}, {"name": "Kazakhstan", "gross": 612988911, "share": 1.1527, "lon": 67.0, "lat": 48.0}, {"name": "United Kingdom", "gross": 612440404, "share": 1.1516, "lon": -1.2, "lat": 52.5}, {"name": "Peru", "gross": 601872174, "share": 1.1318, "lon": -75.0, "lat": -9.2}, {"name": "Norway", "gross": 547583861, "share": 1.0297, "lon": 8.5, "lat": 60.5}, {"name": "Pakistan", "gross": 542448485, "share": 1.02, "lon": 69.3, "lat": 30.4}, {"name": "Oman", "gross": 523171357, "share": 0.9838, "lon": 57.6, "lat": 21.5}, {"name": "Indonesia", "gross": 513436515, "share": 0.9655, "lon": 113.9, "lat": -0.8}, {"name": "Algeria", "gross": 473621863, "share": 0.8906, "lon": 2.6, "lat": 28.0}, {"name": "Slovakia", "gross": 469652926, "share": 0.8831, "lon": 19.7, "lat": 48.7}, {"name": "Austria", "gross": 455361871, "share": 0.8563, "lon": 14.6, "lat": 47.5}, {"name": "Malaysia", "gross": 455120441, "share": 0.8558, "lon": 109.7, "lat": 4.2}, {"name": "Saudi Arabia", "gross": 426609512, "share": 0.8022, "lon": 45.1, "lat": 23.9}, {"name": "Portugal", "gross": 363888873, "share": 0.6843, "lon": -8.2, "lat": 39.4}, {"name": "Iran", "gross": 363871638, "share": 0.6842, "lon": 53.7, "lat": 32.4}, {"name": "Poland", "gross": 357930518, "share": 0.6731, "lon": 19.1, "lat": 52.1}, {"name": "Senegal", "gross": 346741736, "share": 0.652, "lon": -14.5, "lat": 14.5}, {"name": "Zimbabwe", "gross": 335864237, "share": 0.6316, "lon": 29.9, "lat": -19.0}, {"name": "South Korea", "gross": 332807677, "share": 0.6258, "lon": 127.8, "lat": 36.5}, {"name": "Zambia", "gross": 321150798, "share": 0.6039, "lon": 27.9, "lat": -13.1}, {"name": "Croatia", "gross": 319588392, "share": 0.601, "lon": 15.2, "lat": 45.1}, {"name": "Ukraine", "gross": 295631697, "share": 0.5559, "lon": 31.2, "lat": 48.4}, {"name": "Cambodia", "gross": 282513858, "share": 0.5312, "lon": 104.9, "lat": 12.6}, {"name": "Qatar", "gross": 246821674, "share": 0.4641, "lon": 51.2, "lat": 25.4}, {"name": "Czechia", "gross": 227982346, "share": 0.4287, "lon": 15.5, "lat": 49.8}, {"name": "Kenya", "gross": 212415753, "share": 0.3994, "lon": 37.9, "lat": 0.0}, {"name": "Switzerland", "gross": 210806856, "share": 0.3964, "lon": 8.2, "lat": 46.8}, {"name": "Ireland", "gross": 209307568, "share": 0.3936, "lon": -8.2, "lat": 53.1}, {"name": "Denmark", "gross": 197607944, "share": 0.3716, "lon": 10.0, "lat": 56.3}, {"name": "Tunisia", "gross": 191519266, "share": 0.3601, "lon": 9.0, "lat": 33.9}, {"name": "Bulgaria", "gross": 176490486, "share": 0.3319, "lon": 25.5, "lat": 42.7}, {"name": "Mongolia", "gross": 171200015, "share": 0.3219, "lon": 103.8, "lat": 46.9}, {"name": "Sweden", "gross": 167811855, "share": 0.3156, "lon": 18.6, "lat": 60.1}, {"name": "Mozambique", "gross": 163909159, "share": 0.3082, "lon": 35.5, "lat": -18.7}, {"name": "Namibia", "gross": 162758019, "share": 0.3061, "lon": 18.5, "lat": -22.0}, {"name": "Chile", "gross": 156691151, "share": 0.2946, "lon": -71.5, "lat": -35.7}, {"name": "Romania", "gross": 147172613, "share": 0.2767, "lon": 25.0, "lat": 45.9}, {"name": "Slovenia", "gross": 144623792, "share": 0.272, "lon": 14.8, "lat": 46.1}, {"name": "Laos", "gross": 143218168, "share": 0.2693, "lon": 102.5, "lat": 17.9}, {"name": "Dominican Republic", "gross": 129881567, "share": 0.2442, "lon": -70.2, "lat": 18.7}, {"name": "Finland", "gross": 129139766, "share": 0.2428, "lon": 26.3, "lat": 64.0}, {"name": "Tanzania", "gross": 127082276, "share": 0.239, "lon": 34.9, "lat": -6.4}, {"name": "Colombia", "gross": 121234904, "share": 0.228, "lon": -74.3, "lat": 4.6}, {"name": "Bolivia", "gross": 115639732, "share": 0.2174, "lon": -64.7, "lat": -16.3}, {"name": "Kuwait", "gross": 111247514, "share": 0.2092, "lon": 47.5, "lat": 29.3}, {"name": "Argentina", "gross": 105472452, "share": 0.1983, "lon": -63.6, "lat": -38.4}, {"name": "Taiwan", "gross": 103222071, "share": 0.1941, "lon": 120.9, "lat": 23.7}, {"name": "Israel", "gross": 100237255, "share": 0.1885, "lon": 34.9, "lat": 31.5}, {"name": "Uganda", "gross": 93667356, "share": 0.1761, "lon": 32.3, "lat": 1.4}, {"name": "Latvia", "gross": 93029705, "share": 0.1749, "lon": 24.6, "lat": 56.9}, {"name": "Singapore", "gross": 90616764, "share": 0.1704, "lon": 103.8, "lat": 1.4}, {"name": "Azerbaijan", "gross": 88242228, "share": 0.1659, "lon": 47.6, "lat": 40.1}, {"name": "Bosnia and Herzegovina", "gross": 84154731, "share": 0.1582, "lon": 17.7, "lat": 44.2}, {"name": "Madagascar", "gross": 79145221, "share": 0.1488, "lon": 46.9, "lat": -18.8}, {"name": "Guatemala", "gross": 78191001, "share": 0.147, "lon": -90.2, "lat": 15.8}, {"name": "North Macedonia", "gross": 76552584, "share": 0.1439, "lon": 21.7, "lat": 41.6}, {"name": "Bhutan", "gross": 75023634, "share": 0.1411, "lon": 90.4, "lat": 27.5}, {"name": "Hungary", "gross": 73324790, "share": 0.1379, "lon": 19.5, "lat": 47.0}, {"name": "Syria", "gross": 73226879, "share": 0.1377, "lon": 38.3, "lat": 35.0}, {"name": "Luxembourg", "gross": 64538348, "share": 0.1214, "lon": 6.1, "lat": 49.8}, {"name": "Albania", "gross": 60699673, "share": 0.1141, "lon": 20.2, "lat": 41.2}, {"name": "Nigeria", "gross": 59915427, "share": 0.1127, "lon": 8.7, "lat": 9.1}, {"name": "Lebanon", "gross": 58365442, "share": 0.1098, "lon": 35.9, "lat": 33.9}, {"name": "Lithuania", "gross": 56919726, "share": 0.107, "lon": 23.9, "lat": 55.9}, {"name": "Uzbekistan", "gross": 54627963, "share": 0.1027, "lon": 63.9, "lat": 41.4}, {"name": "Cyprus", "gross": 51541038, "share": 0.0969, "lon": 33.4, "lat": 35.1}, {"name": "Angola", "gross": 49395917, "share": 0.0929, "lon": 17.9, "lat": -11.2}, {"name": "Honduras", "gross": 48028701, "share": 0.0903, "lon": -86.2, "lat": 15.2}, {"name": "The Bahamas", "gross": 42979083, "share": 0.0808, "lon": -77.4, "lat": 25.0}, {"name": "Serbia", "gross": 39308553, "share": 0.0739, "lon": 21.0, "lat": 44.0}, {"name": "New Zealand", "gross": 38920988, "share": 0.0732, "lon": 172.0, "lat": -41.5}, {"name": "Myanmar", "gross": 29359762, "share": 0.0552, "lon": 95.9, "lat": 16.9}, {"name": "Philippines", "gross": 24807882, "share": 0.0466, "lon": 121.8, "lat": 12.9}, {"name": "Trinidad and Tobago", "gross": 24599096, "share": 0.0463, "lon": -61.2, "lat": 10.7}, {"name": "Ecuador", "gross": 22955150, "share": 0.0432, "lon": -78.2, "lat": -1.8}, {"name": "Nepal", "gross": 21144769, "share": 0.0398, "lon": 84.1, "lat": 28.4}, {"name": "Belarus", "gross": 19286626, "share": 0.0363, "lon": 28.0, "lat": 53.7}, {"name": "Hong Kong", "gross": 19192889, "share": 0.0361, "lon": 114.1, "lat": 22.4}, {"name": "Nauru", "gross": 18081025, "share": 0.034, "lon": 166.9, "lat": -0.5}, {"name": "Ghana", "gross": 17598333, "share": 0.0331, "lon": -1.0, "lat": 7.9}, {"name": "Sri Lanka", "gross": 17502587, "share": 0.0329, "lon": 80.8, "lat": 7.9}, {"name": "Estonia", "gross": 17208667, "share": 0.0324, "lon": 25.0, "lat": 58.6}, {"name": "Libya", "gross": 16716342, "share": 0.0314, "lon": 17.2, "lat": 27.0}, {"name": "El Salvador", "gross": 16085957, "share": 0.0302, "lon": -88.9, "lat": 13.8}, {"name": "Mauritania", "gross": 15177199, "share": 0.0285, "lon": -10.9, "lat": 20.3}, {"name": "Costa Rica", "gross": 13215105, "share": 0.0248, "lon": -83.8, "lat": 9.7}, {"name": "Jamaica", "gross": 12671717, "share": 0.0238, "lon": -77.3, "lat": 18.1}, {"name": "Bangladesh", "gross": 12498636, "share": 0.0235, "lon": 90.4, "lat": 23.7}, {"name": "Iceland", "gross": 12056174, "share": 0.0227, "lon": -18.1, "lat": 65.0}, {"name": "Bahrain", "gross": 11639600, "share": 0.0219, "lon": 50.5, "lat": 26.0}, {"name": "Armenia", "gross": 10615514, "share": 0.02, "lon": 44.9, "lat": 40.1}, {"name": "Georgia", "gross": 10587292, "share": 0.0199, "lon": 43.4, "lat": 42.3}, {"name": "Turkmenistan", "gross": 10498027, "share": 0.0197, "lon": 59.6, "lat": 40.0}, {"name": "Uruguay", "gross": 10299974, "share": 0.0194, "lon": -56.0, "lat": -32.5}, {"name": "Tajikistan", "gross": 10286548, "share": 0.0193, "lon": 71.3, "lat": 38.9}, {"name": "Kyrgyzstan", "gross": 9896938, "share": 0.0186, "lon": 74.8, "lat": 41.2}, {"name": "Panama", "gross": 9338411, "share": 0.0176, "lon": -80.8, "lat": 8.5}, {"name": "Moldova", "gross": 9014077, "share": 0.017, "lon": 28.4, "lat": 47.4}, {"name": "Guyana", "gross": 8329957, "share": 0.0157, "lon": -58.9, "lat": 5.0}, {"name": "Suriname", "gross": 7261833, "share": 0.0137, "lon": -56.0, "lat": 4.0}, {"name": "Afghanistan", "gross": 6675799, "share": 0.0126, "lon": -0.5, "lat": 33.9}, {"name": "Cameroon", "gross": 6218362, "share": 0.0117, "lon": 12.4, "lat": 5.7}, {"name": "Brunei", "gross": 5939458, "share": 0.0112, "lon": 114.7, "lat": 4.5}, {"name": "Fiji", "gross": 5148925, "share": 0.0097, "lon": 178.1, "lat": -17.7}, {"name": "Iraq", "gross": 4557013, "share": 0.0086, "lon": 43.7, "lat": 33.2}, {"name": "Niger", "gross": 4561832, "share": 0.0086, "lon": 8.1, "lat": 16.1}, {"name": "Ethiopia", "gross": 4518262, "share": 0.0085, "lon": 40.5, "lat": 9.1}, {"name": "Republic of the Congo", "gross": 4022400, "share": 0.0076, "lon": 15.2, "lat": -0.2}, {"name": "Rwanda", "gross": 2172469, "share": 0.0041, "lon": 29.9, "lat": -1.9}, {"name": "Montserrat", "gross": 1749832, "share": 0.0033, "lon": -62.2, "lat": 16.7}, {"name": "Democratic Republic of the Congo", "gross": 1705243, "share": 0.0032, "lon": 23.7, "lat": -2.9}, {"name": "Malawi", "gross": 1462517, "share": 0.0028, "lon": 34.3, "lat": -13.2}, {"name": "Montenegro", "gross": 1373585, "share": 0.0026, "lon": 19.4, "lat": 42.8}, {"name": "Mauritius", "gross": 1323702, "share": 0.0025, "lon": 57.6, "lat": -20.3}, {"name": "Benin", "gross": 1048573, "share": 0.002, "lon": 2.3, "lat": 9.3}, {"name": "Paraguay", "gross": 1022290, "share": 0.0019, "lon": -58.4, "lat": -23.4}, {"name": "Liberia", "gross": 921119, "share": 0.0017, "lon": -9.4, "lat": 6.5}, {"name": "The Gambia", "gross": 775151, "share": 0.0015, "lon": -15.3, "lat": 13.4}, {"name": "Sudan", "gross": 486366, "share": 0.0009, "lon": 29.7, "lat": 12.9}, {"name": "Sierra Leone", "gross": 249670, "share": 0.0005, "lon": -11.8, "lat": 8.5}, {"name": "Guinea", "gross": 183978, "share": 0.0003, "lon": -11.3, "lat": 11.0}, {"name": "Somalia", "gross": 148044, "share": 0.0003, "lon": 46.2, "lat": 6.1}, {"name": "Chad", "gross": 133778, "share": 0.0003, "lon": 18.7, "lat": 15.5}, {"name": "Antigua and Barbuda", "gross": 90849, "share": 0.0002, "lon": -61.8, "lat": 17.1}, {"name": "Palestine", "gross": 75566, "share": 0.0001, "lon": 35.3, "lat": 31.9}, {"name": "Yemen", "gross": 60032, "share": 0.0001, "lon": 48.5, "lat": 15.6}, {"name": "Macao", "gross": 31781, "share": 0.0001, "lon": 113.5, "lat": 22.2}, {"name": "North Korea", "gross": 39831, "share": 0.0001, "lon": 127.2, "lat": 40.2}, {"name": "Haiti", "gross": 52727, "share": 0.0001, "lon": -72.3, "lat": 18.9}, {"name": "Mali", "gross": 39176, "share": 0.0001, "lon": -2.0, "lat": 17.6}, {"name": "Eswatini", "gross": 44795, "share": 0.0001, "lon": 31.5, "lat": -26.5}, {"name": "Burundi", "gross": 69845, "share": 0.0001, "lon": 29.9, "lat": -3.4}, {"name": "Seychelles", "gross": 75397, "share": 0.0001, "lon": 55.5, "lat": -4.7}, {"name": "Djibouti", "gross": 36950, "share": 0.0001, "lon": 42.6, "lat": 11.8}, {"name": "Papua New Guinea", "gross": 47537, "share": 0.0001, "lon": 143.9, "lat": -6.3}, {"name": "Marshall Islands", "gross": 41332, "share": 0.0001, "lon": 168.7, "lat": 7.1}, {"name": "Cayman Islands", "gross": 4929, "share": 0.0, "lon": -81.2, "lat": 19.3}, {"name": "Eritrea", "gross": 22571, "share": 0.0, "lon": 39.8, "lat": 15.2}, {"name": "Solomon Islands", "gross": 5073, "share": 0.0, "lon": 159.0, "lat": -9.6}];
+const META = {"title": "White Gold \u2014 Global Salt Trade 2024", "hs_chapter": "25", "year": 2024, "total_importers": 203, "global_market_usd": 53180122078, "india_total": 2057931190, "china_total": 3182172391, "usa_total": 3189113029};
+const CC = {
+  india: '#c87840',
+  china: '#b03030',
+  usa:   '#2868a8',
+};
+
+// ═══════════════════════════════════════════════════
+// SLIDE NAVIGATION
+// ═══════════════════════════════════════════════════
+const TOTAL = 12;
+let cur = 0;
+const slides = [];
+
+function buildNav() {
+  const dotsEl = document.getElementById('dots');
+  for (let i = 0; i < TOTAL; i++) {
+    const el = document.getElementById(i < 9 ? `slide-${i}` : (i === 9 ? 'slide-map' : `slide-${i}`));
+    slides.push(el);
+    const d = document.createElement('span');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => go(i);
+    dotsEl.appendChild(d);
+  }
+}
+
+function go(n) {
+  if (n < 0 || n >= TOTAL) return;
+  slides[cur]?.classList.remove('active');
+  document.querySelectorAll('.dot')[cur]?.classList.remove('active');
+  cur = n;
+  const el = slides[cur];
+  el.classList.add('active');
+  el.classList.remove('slide-fade-in');
+  void el.offsetWidth; // reflow
+  el.classList.add('slide-fade-in');
+  document.querySelectorAll('.dot')[cur]?.classList.add('active');
+  document.getElementById('slide-num').textContent = `${cur+1} / ${TOTAL}`;
+  document.getElementById('progress-fill').style.width = `${cur/(TOTAL-1)*100}%`;
+  document.getElementById('btn-prev').disabled = cur === 0;
+  document.getElementById('btn-next').disabled = cur === TOTAL-1;
+  if (n === 9 && !mapReady) initMap();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); go(cur+1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); go(cur-1); }
+  if (e.key === 'Escape') go(0);
+});
+
+buildNav();
+go(0);
+
+// ═══════════════════════════════════════════════════
+// MAP
+// ═══════════════════════════════════════════════════
+let mapReady = false;
+let activeFilter = 'all';
+let arcEls = []; // {el, country, name, pct, usd}
+let particles = null;
+
+function filterArcs(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filt-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase().includes(f === 'all' ? 'all' : f));
+  });
+  arcEls.forEach(a => {
+    const vis = f === 'all' || a.country === f;
+    a.glowEl?.style && (a.glowEl.style.opacity = vis ? null : '0');
+    a.mainEl?.style && (a.mainEl.style.opacity = vis ? null : '0');
+    a.coreEl?.style && (a.coreEl.style.opacity = vis ? null : '0');
+  });
+}
+
+class ParticleSystem {
+  constructor(svgNode, arcs) {
+    this.svg = svgNode; this.arcs = arcs;
+    this.dots = []; this.running = true; this._build(); this._loop();
+  }
+  _build() {
+    this.arcs.forEach(a => {
+      if (!a.mainEl) return;
+      const n = Math.max(1, Math.round(a.pct / 8));
+      for (let i = 0; i < n; i++) {
+        const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('r', Math.max(2, Math.min(5, a.pct / 8)));
+        c.setAttribute('fill', CC[a.country]);
+        c.setAttribute('opacity','0');
+        c.setAttribute('filter','url(#pf)');
+        this.svg.appendChild(c);
+        this.dots.push({ el:c, pathEl:a.mainEl, country:a.country, phase:i/n, speed:0.00018+Math.random()*0.00012 });
+      }
+    });
+  }
+  _loop() {
+    if (!this.running) return;
+    this.dots.forEach(d => {
+      if (activeFilter !== 'all' && d.country !== activeFilter) {
+        d.el.setAttribute('opacity','0'); return;
+      }
+      d.phase = (d.phase + d.speed) % 1;
+      try {
+        const len = d.pathEl.getTotalLength();
+        const pt  = d.pathEl.getPointAtLength(d.phase * len);
+        const a   = d.phase < 0.06 ? d.phase/0.06 : d.phase > 0.94 ? (1-d.phase)/0.06 : 1;
+        d.el.setAttribute('cx', pt.x);
+        d.el.setAttribute('cy', pt.y);
+        d.el.setAttribute('opacity', (a * 0.9).toFixed(3));
+      } catch(e) {}
+    });
+    requestAnimationFrame(() => this._loop());
+  }
+  stop() { this.running = false; }
+}
+
+async function initMap() {
+  mapReady = true;
+  const svgEl = document.getElementById('world-svg');
+  const W = window.innerWidth, H = window.innerHeight;
+  svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svgEl.setAttribute('width', W);
+  svgEl.setAttribute('height', H);
+
+  const svg = d3.select('#world-svg');
+
+  // ── DEFS ──────────────────────────────────────────
+  const defs = svg.append('defs');
+
+  // Ocean: warm sand tones (editorial palette)
+  const og = defs.append('linearGradient').attr('id','og').attr('x1','0').attr('y1','0').attr('x2','0').attr('y2','1');
+  og.append('stop').attr('offset','0%').attr('stop-color','#c8b890');
+  og.append('stop').attr('offset','60%').attr('stop-color','#d4c4a0');
+  og.append('stop').attr('offset','100%').attr('stop-color','#e0d4b8');
+
+  // Land: dark charcoal (contrast with sand ocean)
+  const lg = defs.append('linearGradient').attr('id','lg').attr('x1','0').attr('y1','0').attr('x2','0').attr('y2','1');
+  lg.append('stop').attr('offset','0%').attr('stop-color','#3a3020');
+  lg.append('stop').attr('offset','100%').attr('stop-color','#2a2418');
+
+  // Vignette
+  const vg = defs.append('radialGradient').attr('id','vg').attr('cx','50%').attr('cy','50%').attr('r','70%');
+  vg.append('stop').attr('offset','0%').attr('stop-color','transparent');
+  vg.append('stop').attr('offset','100%').attr('stop-color','rgba(20,16,10,0.5)');
+
+  // Arc glow filter
+  const af = defs.append('filter').attr('id','af').attr('x','-60%').attr('y','-60%').attr('width','220%').attr('height','220%');
+  af.append('feGaussianBlur').attr('stdDeviation','14').attr('result','b');
+  af.append('feColorMatrix').attr('in','b').attr('type','saturate').attr('values','3');
+
+  // Particle glow
+  const pf = defs.append('filter').attr('id','pf').attr('x','-200%').attr('y','-200%').attr('width','500%').attr('height','500%');
+  pf.append('feGaussianBlur').attr('stdDeviation','3.5').attr('result','b');
+  const pfm = pf.append('feMerge');
+  pfm.append('feMergeNode').attr('in','b');
+  pfm.append('feMergeNode').attr('in','SourceGraphic');
+
+  // Dest glow
+  const dg = defs.append('filter').attr('id','dg').attr('x','-300%').attr('y','-300%').attr('width','700%').attr('height','700%');
+  dg.append('feGaussianBlur').attr('stdDeviation','8').attr('result','b');
+  const dgm = dg.append('feMerge');
+  dgm.append('feMergeNode').attr('in','b');
+  dgm.append('feMergeNode').attr('in','b');
+  dgm.append('feMergeNode').attr('in','SourceGraphic');
+
+  // Sphere clip
+  const proj = d3.geoNaturalEarth1().scale(W/5.8).translate([W/2, H/2]);
+  const path = d3.geoPath().projection(proj);
+  defs.append('clipPath').attr('id','sc').append('path').datum({type:'Sphere'}).attr('d',path);
+
+  // ── OCEAN ──────────────────────────────────────────
+  svg.append('path').datum({type:'Sphere'}).attr('d',path).attr('fill','url(#og)');
+
+  // ── GRATICULE ──────────────────────────────────────
+  svg.append('path').datum(d3.geoGraticule().step([30,30])())
+    .attr('d',path).attr('stroke','rgba(0,0,0,.12)').attr('stroke-width',.4)
+    .attr('fill','none').attr('clip-path','url(#sc)');
+  svg.append('path').datum(d3.geoGraticule().step([10,10])())
+    .attr('d',path).attr('stroke','rgba(0,0,0,.06)').attr('stroke-width',.2)
+    .attr('fill','none').attr('clip-path','url(#sc)');
+
+  // ── WORLD DATA ─────────────────────────────────────
+  const urls = [
+    'https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json',
+    'https://unpkg.com/world-atlas@2.0.2/countries-110m.json',
+  ];
+  let topo = null;
+  for (const url of urls) {
+    try { topo = await d3.json(url); if (topo) break; } catch(e) {}
+  }
+
+  if (topo) {
+    const countries = topojson.feature(topo, topo.objects.countries);
+    const borders   = topojson.mesh(topo, topo.objects.countries, (a,b) => a!==b);
+
+    // country fills — warm off-white on charcoal base
+    svg.append('g').attr('clip-path','url(#sc)')
+      .selectAll('path').data(countries.features).join('path')
+      .attr('d', path)
+      .attr('fill','url(#lg)')
+      .attr('stroke','none');
+
+    // country borders
+    svg.append('path').datum(borders)
+      .attr('d',path).attr('stroke','rgba(255,255,255,.12)')
+      .attr('stroke-width',.5).attr('fill','none')
+      .attr('clip-path','url(#sc)');
+  }
+
+  // Sphere border
+  svg.append('path').datum({type:'Sphere'}).attr('d',path)
+    .attr('fill','none').attr('stroke','rgba(0,0,0,.3)').attr('stroke-width',1.5);
+
+  // ── ALL IMPORTERS (dots, sized by share) ──────────
+  const tip = document.getElementById('map-tooltip');
+  const tipRoute = document.getElementById('tip-route');
+  const tipVal = document.getElementById('tip-val');
+  const tipSub = document.getElementById('tip-sub');
+  const tipBar = document.getElementById('tip-bar');
+
+  ALL_IMPORTERS.forEach(d => {
+    if (!d.lon || !d.lat) return;
+    const pt = proj([d.lon, d.lat]);
+    if (!pt) return;
+    const r = Math.max(2, Math.min(9, Math.sqrt(d.share) * 2.2));
+    const isMain = ['India','China','United States of America'].includes(d.name);
+    if (!isMain) {
+      svg.append('circle').attr('cx',pt[0]).attr('cy',pt[1]).attr('r',r)
+        .attr('fill','rgba(255,255,255,.55)')
+        .attr('stroke','rgba(255,255,255,.25)').attr('stroke-width',.5)
+        .attr('cursor','pointer')
+        .on('mousemove', ev => {
+          tip.style.display='block';
+          tip.style.left=(ev.clientX+14)+'px'; tip.style.top=(ev.clientY-60)+'px';
+          tipRoute.textContent=d.name;
+          tipVal.textContent=d.share.toFixed(2)+'%';
+          tipSub.textContent='Global HS25 import share';
+          tipBar.style.background='rgba(0,0,0,.3)';
+          tipBar.style.width=(Math.min(100,d.share*20))+'%';
+        })
+        .on('mouseleave', () => tip.style.display='none');
+    }
+  });
+
+  // ── ARCS ───────────────────────────────────────────
+  ALL_ARCS.forEach((arc, i) => {
+    const color = CC[arc.country];
+    const thick = Math.max(1.2, arc.pct / 6.5);
+    const from = arc.from;
+    const to = arc.to;
+    if (!from[0] || !to[0]) return;
+
+    const geoLine = {
+      type:'LineString',
+      coordinates: d3.range(0,1.02,0.02).map(t => d3.geoInterpolate(from,to)(t))
+    };
+
+    // glow (wide)
+    const glowEl = svg.append('path').datum(geoLine).attr('d',path)
+      .attr('stroke',color).attr('stroke-width',thick*4)
+      .attr('fill','none').attr('opacity',.08)
+      .attr('filter','url(#af)').attr('clip-path','url(#sc)').node();
+
+    // main arc — draw animation
+    const mainNode = svg.append('path').datum(geoLine).attr('d',path)
+      .attr('stroke',color).attr('stroke-width',thick)
+      .attr('fill','none').attr('opacity',0)
+      .attr('stroke-linecap','round')
+      .attr('clip-path','url(#sc)')
+      .attr('cursor','pointer')
+      .on('mousemove', ev => {
+        tip.style.display='block';
+        tip.style.left=(ev.clientX+14)+'px'; tip.style.top=(ev.clientY-60)+'px';
+        tipRoute.textContent=arc.name+' → '+(['india','china','usa'][['india','china','usa'].indexOf(arc.country)].charAt(0).toUpperCase()+['india','china','usa'][['india','china','usa'].indexOf(arc.country)].slice(1));
+        tipVal.textContent=arc.pct.toFixed(2)+'%';
+        tipSub.textContent='of destination imports · ~$'+Math.round(arc.usd/1e6)+'M';
+        tipBar.style.background=color;
+        tipBar.style.width=(Math.min(100,arc.pct*3))+'%';
+      })
+      .on('mouseleave', () => tip.style.display='none');
+
+    // white core
+    const coreNode = svg.append('path').datum(geoLine).attr('d',path)
+      .attr('stroke','white').attr('stroke-width',Math.max(.4,thick*.35))
+      .attr('fill','none').attr('opacity',0)
+      .attr('stroke-linecap','round')
+      .attr('clip-path','url(#sc)').attr('pointer-events','none').node();
+
+    // draw animation
+    const mn = mainNode.node();
+    let len = 200;
+    try { len = mn.getTotalLength(); } catch(e) {}
+    d3.select(mn)
+      .attr('stroke-dasharray',`${len} ${len}`).attr('stroke-dashoffset',len)
+      .attr('opacity',.82)
+      .transition().duration(1200).delay(200+i*55).ease(d3.easeQuadInOut)
+      .attr('stroke-dashoffset',0)
+      .on('end', () => d3.select(mn).attr('stroke-dasharray',null));
+
+    d3.select(coreNode)
+      .transition().duration(1200).delay(200+i*55)
+      .attr('opacity',.38);
+
+    arcEls.push({ glowEl, mainEl:mn, coreEl:coreNode, country:arc.country, pct:arc.pct, name:arc.name });
+  });
+
+  // ── SOURCE NODES ──────────────────────────────────
+  const drawn = new Set();
+  ALL_ARCS.forEach(arc => {
+    const key = arc.from.join(',');
+    if (drawn.has(key)) return;
+    drawn.add(key);
+    const pt = proj(arc.from);
+    if (!pt) return;
+    svg.append('circle').attr('cx',pt[0]).attr('cy',pt[1]).attr('r',3)
+      .attr('fill','white').attr('opacity',.6).attr('filter','url(#pf)')
+      .attr('pointer-events','none');
+  });
+
+  // ── DESTINATION NODES ─────────────────────────────
+  const DESTS = [
+    {pos:[78.9,20.6],  c:'india', name:'India'},
+    {pos:[104.2,35.9], c:'china', name:'China'},
+    {pos:[-98.0,39.0], c:'usa',   name:'USA'},
+  ];
+  DESTS.forEach(dest => {
+    const pt = proj(dest.pos);
+    if (!pt) return;
+    const [x,y] = pt;
+    const col = CC[dest.c];
+    // 3 pulse rings via CSS animation
+    ['pulse-ring','pulse-ring pulse-ring-2','pulse-ring pulse-ring-3'].forEach(cls => {
+      svg.append('circle').attr('cx',x).attr('cy',y).attr('r',12)
+        .attr('fill','none').attr('stroke',col).attr('stroke-width',1.5)
+        .attr('class',cls);
+    });
+    // glow halo
+    svg.append('circle').attr('cx',x).attr('cy',y).attr('r',10)
+      .attr('fill',col).attr('opacity',.18).attr('filter','url(#dg)');
+    // solid dot
+    svg.append('circle').attr('cx',x).attr('cy',y).attr('r',6)
+      .attr('fill',col).attr('opacity',.95).attr('filter','url(#pf)');
+    svg.append('circle').attr('cx',x).attr('cy',y).attr('r',2.5)
+      .attr('fill','white').attr('opacity',1);
+    // label
+    svg.append('text').attr('x',x+12).attr('y',y+5)
+      .text(dest.name)
+      .attr('fill','white').attr('font-size',11)
+      .attr('font-family','Playfair Display, serif')
+      .attr('font-weight','700')
+      .attr('filter','url(#pf)').attr('opacity',.9);
+  });
+
+  // ── VIGNETTE ──────────────────────────────────────
+  svg.append('rect').attr('width',W).attr('height',H)
+    .attr('fill','url(#vg)').attr('pointer-events','none');
+
+  // ── PARTICLES ─────────────────────────────────────
+  particles = new ParticleSystem(svg.node(), arcEls);
+}
+</script>
+
+<!-- inline pulse-ring animation (can't use @keyframes in JS-created SVG easily) -->
+<style>
+@keyframes pulse-ring{
+  0%{transform:scale(1);opacity:.8;}
+  100%{transform:scale(4.5);opacity:0;}
+}
+.pulse-ring{animation:pulse-ring 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center;}
+.pulse-ring-2{animation-delay:.87s;}
+.pulse-ring-3{animation-delay:1.73s;}
+</style>
+</body>
+</html>
