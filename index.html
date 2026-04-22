@@ -1007,6 +1007,25 @@ const CC = {
   usa:   '#2868a8',
 };
 
+let cachedIndiaGeoData = null;
+let isFetchingIndiaData = false;
+
+async function preloadIndiaData() {
+  if (cachedIndiaGeoData || isFetchingIndiaData) return;
+  isFetchingIndiaData = true;
+  try {
+    // ⬇️ Changed this line to load locally ⬇️
+    cachedIndiaGeoData = await d3.json('./india_states.geojson'); 
+    console.log("India GeoJSON pre-cached locally.");
+  } catch (err) {
+    console.error("Failed to preload India data:", err);
+  }
+  isFetchingIndiaData = false;
+}
+
+// Kick off the download immediately when the page loads
+preloadIndiaData();
+
 // ═══════════════════════════════════════════════════
 // SLIDE NAVIGATION
 // ═══════════════════════════════════════════════════
@@ -1369,10 +1388,11 @@ async function toggleIndiaView() {
   const btn = document.getElementById('btn-india-zoom');
   
   if (indiaViewActive) {
+    // 1. Hide Global Elements instantly for snappy UX
     btn.style.background = '#ff6600';
     btn.style.color = 'white';
+    const originalBtnText = btn.innerHTML; // Save "🔍 Zoom Gujarat"
     
-    // 1. Hide Global Elements
     svg.selectAll('*').filter(function() {
       return this.parentNode && this.parentNode.id === 'world-svg' && this.tagName !== 'defs' && this.id !== 'india-view';
     }).transition().duration(800).attr('opacity', 0);
@@ -1383,54 +1403,59 @@ async function toggleIndiaView() {
     
     // 2. Build India Layer if it doesn't exist
     if (!indiaLayer) {
+      // --- SPINNER & CACHE CHECK ---
+      if (!cachedIndiaGeoData) {
+        btn.innerHTML = '⏳ Loading...';
+        btn.style.pointerEvents = 'none'; // Prevent double-clicks
+        await preloadIndiaData(); // Wait for it to finish
+        btn.innerHTML = originalBtnText;
+        btn.style.pointerEvents = 'auto';
+        
+        if (!cachedIndiaGeoData) {
+            alert("Could not load map data. Please check your connection.");
+            toggleIndiaView(); // Revert back
+            return;
+        }
+      }
+      // -----------------------------
+
       indiaLayer = svg.append('g').attr('id', 'india-view').attr('opacity', 0);
       
       const W = window.innerWidth, H = window.innerHeight;
       const indiaProj = d3.geoMercator().scale(W * 1.2).center([82, 23]).translate([W/2, H/2]);
       const indiaPath = d3.geoPath().projection(indiaProj);
       
-      try {
-        // Using a highly reliable GeoJSON repository instead of the dead TopoJSON link
-        const geoData = await d3.json('https://raw.githubusercontent.com/geohacker/india/master/state/india_state.geojson');
+      // Use the pre-cached data instead of fetching!
+      indiaLayer.selectAll('path')
+        .data(cachedIndiaGeoData.features)
+        .join('path')
+        .attr('d', indiaPath)
+        .attr('stroke', 'rgba(255,255,255,0.4)')
+        .attr('stroke-width', 1)
+        .attr('fill', d => {
+          const stateName = (d.properties.NAME_1 || d.properties.st_nm || d.properties.name || '').toLowerCase();
+          if (stateName.includes('gujarat') || stateName.includes('tamil nadu')) return '#31008a'; 
+          return '#d3bfff'; 
+        });
         
-        indiaLayer.selectAll('path')
-          .data(geoData.features)
-          .join('path')
-          .attr('d', indiaPath)
-          .attr('stroke', 'rgba(255,255,255,0.4)')
-          .attr('stroke-width', 1)
-          .attr('fill', d => {
-            // Flexible check in case different GeoJSONs use different property keys
-            const stateName = (d.properties.NAME_1 || d.properties.st_nm || d.properties.name || '').toLowerCase();
-            
-            // Match the colors from your mockup image
-            if (stateName.includes('gujarat') || stateName.includes('tamil nadu')) return '#31008a'; 
-            return '#d3bfff'; 
-          });
-          
-        // Gujarat centroid coordinates
-        const gujaratCentroid = indiaProj([71.5, 22.8]);
+      const gujaratCentroid = indiaProj([71.5, 22.8]);
+      
+      indiaLayer.append('line')
+        .attr('x1', gujaratCentroid[0] - 300)
+        .attr('y1', gujaratCentroid[1])
+        .attr('x2', gujaratCentroid[0])
+        .attr('y2', gujaratCentroid[1])
+        .attr('stroke', '#ff6600')
+        .attr('stroke-width', 2);
         
-        indiaLayer.append('line')
-          .attr('x1', gujaratCentroid[0] - 300)
-          .attr('y1', gujaratCentroid[1])
-          .attr('x2', gujaratCentroid[0])
-          .attr('y2', gujaratCentroid[1])
-          .attr('stroke', '#ff6600')
-          .attr('stroke-width', 2);
-          
-        indiaLayer.append('text')
-          .attr('x', gujaratCentroid[0] - 310)
-          .attr('y', gujaratCentroid[1] + 4)
-          .text('GUJARAT')
-          .attr('fill', '#ff6600')
-          .attr('font-family', 'DM Mono, monospace')
-          .attr('text-anchor', 'end')
-          .attr('font-size', '1rem');
-          
-      } catch (err) {
-        console.error("Map Data 404 Error: Could not fetch GeoJSON.", err);
-      }
+      indiaLayer.append('text')
+        .attr('x', gujaratCentroid[0] - 310)
+        .attr('y', gujaratCentroid[1] + 4)
+        .text('GUJARAT')
+        .attr('fill', '#ff6600')
+        .attr('font-family', 'DM Mono, monospace')
+        .attr('text-anchor', 'end')
+        .attr('font-size', '1rem');
     }
     
     // Fade in India Layer
@@ -1438,6 +1463,7 @@ async function toggleIndiaView() {
     
   } else {
     // Revert to Global View
+    btn.innerHTML = '🔍 Zoom Gujarat';
     btn.style.background = 'rgba(255,255,255,.9)';
     btn.style.color = '#ff6600';
     
@@ -1466,7 +1492,6 @@ async function toggleIndiaView() {
     filterArcs('all'); 
   }
 }
-
 </script>
 
 <!-- inline pulse-ring animation (can't use @keyframes in JS-created SVG easily) -->
