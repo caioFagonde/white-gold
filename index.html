@@ -1372,8 +1372,11 @@ async function toggleIndiaView() {
     btn.style.background = '#ff6600';
     btn.style.color = 'white';
     
-    // 1. Hide Global Elements
-    svg.selectAll('> path, circle, text').transition().duration(800).attr('opacity', 0);
+    // 1. Hide Global Elements (Properly scoped selector)
+    d3.selectAll('#world-svg > *:not(defs):not(#india-view)')
+      .transition().duration(800)
+      .attr('opacity', 0);
+      
     if (particles) particles.stop();
     document.querySelector('.map-panel').style.opacity = '0';
     document.querySelector('.map-stats-panel').style.opacity = '0';
@@ -1436,13 +1439,15 @@ async function toggleIndiaView() {
     
     if (indiaLayer) indiaLayer.transition().duration(800).attr('opacity', 0);
     
-    // Restore Global Elements
-    svg.selectAll('> path, circle, text').transition().duration(1000).attr('opacity', function() {
-        // Restore specific opacities based on their original attributes
-        if (this.tagName === 'circle' && this.getAttribute('fill') === 'none') return 1; // Pulses
-        if (this.tagName === 'rect') return 1; // Vignette
-        return 0.8; // Default rough restoration
-    });
+    // Restore Global Elements (Properly scoped selector)
+    d3.selectAll('#world-svg > *:not(defs):not(#india-view)')
+      .transition().duration(1000)
+      .attr('opacity', function() {
+          if (this.tagName === 'circle' && this.getAttribute('fill') === 'none') return 1; // Pulses
+          if (this.tagName === 'rect') return 1; // Vignette
+          if (this.tagName === 'g') return 1; // Country paths container
+          return 0.8; // Default rough restoration
+      });
     
     document.querySelector('.map-panel').style.transition = 'opacity 0.8s';
     document.querySelector('.map-panel').style.opacity = '1';
