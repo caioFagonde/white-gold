@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Global Salt Trade Map 2024</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
 
 <style>
 /* ═══════════════════════════════════════════════════
@@ -16,7 +16,7 @@ html, body {
   height: 100vh; 
   overflow: hidden; 
   background: #f9f2e2; /* Fundo Mapa */
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Anonymous Pro', monospace;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -55,17 +55,18 @@ html, body {
   border: 1px solid rgba(0,0,0,.15);
   border-radius: 20px; 
   padding: 8px 18px;
-  font-family: 'DM Mono', monospace;
-  font-size: .6rem; 
+  font-family: 'Anonymous Pro', monospace;
+  font-size: .65rem; 
   letter-spacing: .12em;
   text-transform: uppercase; 
   cursor: pointer;
   transition: all .2s;
+  color: #000000;
 }
 .filt-btn:hover, .filt-btn.active {
-  background: #2c2620; 
+  background: #000000; 
   color: white; 
-  border-color: #2c2620;
+  border-color: #000000;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -79,9 +80,9 @@ html, body {
   box-shadow: 0 8px 32px rgba(0,0,0,.18);
   min-width: 200px; display: none;
 }
-.tip-route { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; color: #7a706a; margin-bottom: 6px; }
-.tip-val { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #2c2620; line-height: 1; margin-bottom: 4px; }
-.tip-sub { font-size: .78rem; color: #3a3530; font-style: italic; }
+.tip-route { font-family: 'Anonymous Pro', monospace; font-size: .55rem; letter-spacing: .12em; text-transform: uppercase; color: #000000; margin-bottom: 6px; }
+.tip-val { font-family: 'Anonymous Pro', monospace; font-size: 1.5rem; font-weight: 700; color: #000000; line-height: 1; margin-bottom: 4px; }
+.tip-sub { font-size: .78rem; color: #000000; font-style: italic; }
 .tip-bar { height: 3px; border-radius: 2px; margin-top: 10px; }
 
 /* ═══════════════════════════════════════════════════
@@ -111,17 +112,17 @@ html, body {
 }
 .popup-content {
   background: #f9f2e2;
-  border: 2px solid #2c2620;
+  border: 2px solid #000000;
   border-radius: 8px;
   padding: 26px;
   max-width: 550px;
   width: 90%;
   box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-  color: #2c2620;
+  color: #000000;
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Anonymous Pro', monospace;
 }
 .close-popup {
   position: absolute;
@@ -129,7 +130,7 @@ html, body {
   right: 18px;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #7a706a;
+  color: #000000;
   transition: color 0.2s;
 }
 .close-popup:hover {
@@ -137,9 +138,9 @@ html, body {
 }
 .popup-content h2 {
   font-size: 1.4rem;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 16px;
-  border-bottom: 2px solid #2c2620;
+  border-bottom: 2px solid #000000;
   padding-bottom: 8px;
 }
 .popup-text {
@@ -151,23 +152,23 @@ html, body {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 16px;
-  font-family: 'DM Mono', monospace;
+  font-family: 'Anonymous Pro', monospace;
   font-size: 0.72rem;
 }
 .popup-table th, .popup-table td {
-  border: 1px solid rgba(44, 38, 32, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 8px 10px;
   text-align: left;
 }
 .popup-table th {
-  background-color: rgba(44, 38, 32, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   font-weight: bold;
 }
 .popup-source {
   font-size: 0.72rem;
-  color: #7a706a;
+  color: #000000;
   font-style: italic;
-  border-top: 1px dashed rgba(44, 38, 32, 0.2);
+  border-top: 1px dashed rgba(0, 0, 0, 0.2);
   padding-top: 10px;
 }
 
@@ -180,21 +181,21 @@ html, body {
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(249, 242, 226, 0.95);
-  border: 2px solid #2c2620;
+  border: 2px solid #000000;
   border-radius: 8px;
   padding: 22px;
   width: 380px;
   max-width: 90%;
   box-shadow: 0 10px 40px rgba(0,0,0,0.25);
   z-index: 150;
-  color: #2c2620;
-  font-family: 'Playfair Display', Georgia, serif;
+  color: #000000;
+  font-family: 'Anonymous Pro', monospace;
 }
 .zoom-panel h3 {
   font-size: 1.15rem;
-  font-weight: 900;
+  font-weight: 700;
   margin-bottom: 10px;
-  border-bottom: 1px solid #2c2620;
+  border-bottom: 1px solid #000000;
   padding-bottom: 6px;
   text-align: center;
 }
@@ -206,16 +207,16 @@ html, body {
 .zoom-panel-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'DM Mono', monospace;
+  font-family: 'Anonymous Pro', monospace;
   font-size: 0.68rem;
 }
 .zoom-panel-table th, .zoom-panel-table td {
-  border: 1px solid rgba(44, 38, 32, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 5px 8px;
   text-align: left;
 }
 .zoom-panel-table th {
-  background-color: rgba(44, 38, 32, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
   font-weight: bold;
 }
 
@@ -250,7 +251,7 @@ html, body {
     <button class="filt-btn" onclick="filterArcs('india')">→ India</button>
     <button class="filt-btn" onclick="filterArcs('china')">→ China</button>
     <button class="filt-btn" onclick="filterArcs('usa')">→ USA</button>
-    <button class="filt-btn" onclick="toggleIndiaView()" id="btn-india-zoom" style="border-color: #ff0000; color: #ff0000;">Zoom</button>
+    <button class="filt-btn" onclick="toggleIndiaView()" id="btn-india-zoom" style="border-color: #B13635; color: #B13635;">🔍 Zoom</button>
   </div>
 
   <div class="map-tooltip" id="map-tooltip">
@@ -358,9 +359,9 @@ const ALL_IMPORTERS = [{"name": "Australia", "gross": 3483157190, "share": 6.549
 
 // ════════ CORES DESTAQUES ════════
 const CC = {
-  india: '#ff0000', // Vermelho
-  china: '#2868a8', // Azul
-  usa:   '#2868a8', // Azul
+  india: '#B13635', // Alterado de #ff0000 para #B13635
+  china: '#000047', // Alterado de #2868a8 para #000047
+  usa:   '#2868a8', 
 };
 
 // Variáveis Globais de Estado
@@ -427,7 +428,7 @@ async function toggleIndiaView() {
   
   if (indiaViewActive) {
     // 1. Esconde mapa base global
-    btn.style.background = '#ff0000';
+    btn.style.background = '#B13635';
     btn.style.color = 'white';
     btn.innerHTML = '🔍 Global Map';
     
@@ -457,39 +458,39 @@ async function toggleIndiaView() {
       const indiaFeature = worldCountriesFeatureCollection?.features.find(f => f.properties.name === "India");
       const chinaFeature = worldCountriesFeatureCollection?.features.find(f => f.properties.name === "China");
       
-      // Desenha Índia
+      // Desenha Índia (#B13635)
       if (indiaFeature) {
         indiaLayer.append('path')
           .datum(indiaFeature)
           .attr('d', pathIndia)
           .attr('stroke', 'rgba(44, 38, 32, 0.4)')
           .attr('stroke-width', 1.2)
-          .attr('fill', '#ff0000')
+          .attr('fill', '#B13635')
           .attr('opacity', 0.85);
       }
       
-      // Desenha China
+      // Desenha China (#000047)
       if (chinaFeature) {
         indiaLayer.append('path')
           .datum(chinaFeature)
           .attr('d', pathChina)
           .attr('stroke', 'rgba(44, 38, 32, 0.4)')
           .attr('stroke-width', 1.2)
-          .attr('fill', '#2868a8')
+          .attr('fill', '#000047')
           .attr('opacity', 0.85);
       }
       
       const pIndia = projIndia([78.9, 20.6]);
       const pChina = projChina([104.2, 35.9]);
       
-      // Títulos e Labels com Outlines para excelente legibilidade (ÍNDIA)
+      // Títulos e Labels pretos com outlines claros para excelente legibilidade (ÍNDIA)
       indiaLayer.append('text')
         .attr('x', pIndia[0])
         .attr('y', pIndia[1] - 140)
         .text('INDIA')
-        .attr('fill', '#ff0000')
-        .attr('font-family', 'Playfair Display')
-        .attr('font-weight', '900')
+        .attr('fill', '#000000') // Cor preta
+        .attr('font-family', 'Anonymous Pro, monospace')
+        .attr('font-weight', '700')
         .attr('text-anchor', 'middle')
         .attr('font-size', '1.5rem')
         .attr('stroke', '#f9f2e2')
@@ -501,8 +502,8 @@ async function toggleIndiaView() {
         .attr('x', pIndia[0])
         .attr('y', pIndia[1] - 115)
         .text('Leading Raw Salt Exporter')
-        .attr('fill', '#7a706a')
-        .attr('font-family', 'DM Mono')
+        .attr('fill', '#000000') // Cor preta
+        .attr('font-family', 'Anonymous Pro, monospace')
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.75rem')
         .attr('stroke', '#f9f2e2')
@@ -510,14 +511,14 @@ async function toggleIndiaView() {
         .attr('stroke-linejoin', 'round')
         .attr('paint-order', 'stroke fill');
 
-      // Títulos e Labels com Outlines para excelente legibilidade (CHINA)
+      // Títulos e Labels pretos com outlines claros para excelente legibilidade (CHINA)
       indiaLayer.append('text')
         .attr('x', pChina[0])
         .attr('y', pChina[1] - 160)
         .text('CHINA')
-        .attr('fill', '#2868a8')
-        .attr('font-family', 'Playfair Display')
-        .attr('font-weight', '900')
+        .attr('fill', '#000000') // Cor preta
+        .attr('font-family', 'Anonymous Pro, monospace')
+        .attr('font-weight', '700')
         .attr('text-anchor', 'middle')
         .attr('font-size', '1.5rem')
         .attr('stroke', '#f9f2e2')
@@ -529,8 +530,8 @@ async function toggleIndiaView() {
         .attr('x', pChina[0])
         .attr('y', pChina[1] - 135)
         .text('Primary Salt Importer')
-        .attr('fill', '#7a706a')
-        .attr('font-family', 'DM Mono')
+        .attr('fill', '#000000') // Cor preta
+        .attr('font-family', 'Anonymous Pro, monospace')
         .attr('text-anchor', 'middle')
         .attr('font-size', '0.75rem')
         .attr('stroke', '#f9f2e2')
@@ -538,25 +539,25 @@ async function toggleIndiaView() {
         .attr('stroke-linejoin', 'round')
         .attr('paint-order', 'stroke fill');
 
-      // Linha de Conexão Curva (Fluxo Comercial)
+      // Linha de Conexão Curva combinando com a cor da Índia (#B13635)
       const dx = pChina[0] - pIndia[0];
       const dy = pChina[1] - pIndia[1];
       const dr = Math.sqrt(dx * dx + dy * dy) * 1.2;
       const curvePath = `M${pIndia[0]},${pIndia[1]} A${dr},${dr} 0 0,1 ${pChina[0]},${pChina[1]}`;
 
-      // Brilho do fluxo
+      // Brilho do fluxo (#B13635)
       indiaLayer.append('path')
         .attr('d', curvePath)
-        .attr('stroke', '#ff0000')
+        .attr('stroke', '#B13635')
         .attr('stroke-width', 6)
         .attr('fill', 'none')
         .attr('opacity', 0.15)
         .attr('filter', 'url(#af)');
 
-      // Linha tracejada e animada do fluxo
+      // Linha tracejada e animada do fluxo (#B13635)
       indiaLayer.append('path')
         .attr('d', curvePath)
-        .attr('stroke', '#ff0000')
+        .attr('stroke', '#B13635')
         .attr('stroke-width', 2.5)
         .attr('fill', 'none')
         .attr('opacity', 0.8)
@@ -569,9 +570,9 @@ async function toggleIndiaView() {
     
   } else {
     // Retorna para Visualização Global
-    btn.innerHTML = 'Zoom';
+    btn.innerHTML = '🔍 Zoom';
     btn.style.background = 'rgba(255,255,255,.9)';
-    btn.style.color = '#ff0000';
+    btn.style.color = '#B13635';
     
     // Oculta painel de detalhes no centro
     panel.style.display = 'none';
@@ -706,11 +707,11 @@ async function initMap() {
     worldCountriesFeatureCollection = countries; // Armazena recurso mundial para visualização do Zoom
     const borders   = topojson.mesh(topo, topo.objects.countries, (a,b) => a!==b);
 
-    // Cor dos países
+    // Cor dos países na página principal alterada para #B57946
     svg.append('g').attr('clip-path','url(#sc)')
       .selectAll('path').data(countries.features).join('path')
       .attr('d', path)
-      .attr('fill','#c0b5a4')
+      .attr('fill','#B57946')
       .attr('stroke','none');
 
     // country borders
@@ -847,13 +848,18 @@ async function initMap() {
     g.append('circle').attr('cx',x).attr('cy',y).attr('r',2.5)
       .attr('fill','white').attr('opacity',1);
       
-    // Text Label
+    // Text Label alterada para preto com outline branco/creme para legibilidade
     g.append('text').attr('x',x+12).attr('y',y+5)
       .text(dest.name)
-      .attr('fill','white').attr('font-size',11)
-      .attr('font-family','Playfair Display, serif')
+      .attr('fill','#000000') // Cor das letras em preto
+      .attr('font-size',11)
+      .attr('font-family','Anonymous Pro, monospace')
       .attr('font-weight','700')
-      .attr('filter','url(#pf)').attr('opacity',.9);
+      .attr('stroke', '#f9f2e2')
+      .attr('stroke-width', '3.5px')
+      .attr('stroke-linejoin', 'round')
+      .attr('paint-order', 'stroke fill')
+      .attr('opacity',.9);
   });
 
   // Salva globalmente para acessar no toggleIndiaView
