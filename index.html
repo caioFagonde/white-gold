@@ -170,6 +170,73 @@ html, body {
   border-top: 1px dashed rgba(44, 38, 32, 0.2);
   padding-top: 10px;
 }
+
+/* ═══════════════════════════════════════════════════
+   ZOOM VIEW PANEL (CENTERED)
+   ═══════════════════════════════════════════════════ */
+.zoom-panel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(249, 242, 226, 0.95);
+  border: 2px solid #2c2620;
+  border-radius: 8px;
+  padding: 22px;
+  width: 380px;
+  max-width: 90%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  z-index: 150;
+  color: #2c2620;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.zoom-panel h3 {
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #2c2620;
+  padding-bottom: 6px;
+  text-align: center;
+}
+.zoom-panel p {
+  font-size: 0.78rem;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.zoom-panel-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+}
+.zoom-panel-table th, .zoom-panel-table td {
+  border: 1px solid rgba(44, 38, 32, 0.2);
+  padding: 5px 8px;
+  text-align: left;
+}
+.zoom-panel-table th {
+  background-color: rgba(44, 38, 32, 0.05);
+  font-weight: bold;
+}
+
+/* Dash Flow Line Animation */
+@keyframes flow-dash {
+  to { stroke-dashoffset: -24; }
+}
+.flow-line-animated {
+  animation: flow-dash 1.2s linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════
+   ZOOM OVERRIDES (CLEANSING GLOBAL ARTIFACTS)
+   ═══════════════════════════════════════════════════ */
+.zoomed-active .pulse-ring {
+  animation: none !important;
+  display: none !important;
+}
+.zoomed-active #world-svg > circle {
+  display: none !important;
+}
 </style>
 </head>
 <body>
@@ -183,7 +250,7 @@ html, body {
     <button class="filt-btn" onclick="filterArcs('india')">→ India</button>
     <button class="filt-btn" onclick="filterArcs('china')">→ China</button>
     <button class="filt-btn" onclick="filterArcs('usa')">→ USA</button>
-    <button class="filt-btn" onclick="toggleIndiaView()" id="btn-india-zoom" style="border-color: #ff0000; color: #ff0000;">🔍 Zoom Gujarat</button>
+    <button class="filt-btn" onclick="toggleIndiaView()" id="btn-india-zoom" style="border-color: #ff0000; color: #ff0000;">Zoom</button>
   </div>
 
   <div class="map-tooltip" id="map-tooltip">
@@ -191,6 +258,42 @@ html, body {
     <div class="tip-val" id="tip-val"></div>
     <div class="tip-sub" id="tip-sub"></div>
     <div class="tip-bar" id="tip-bar"></div>
+  </div>
+
+  <!-- ZOOM PANEL (MOSTRE APENAS EM COMPARAÇÃO LADO A LADO) -->
+  <div class="zoom-panel" id="zoom-panel" style="display: none;">
+    <h3>China Salt Flow & Consumption</h3>
+    <p>China stands as the leading market destination for raw salt exported from India. Inside China, imports are heavily directed into highly demanding industrial sectors:</p>
+    <table class="zoom-panel-table">
+      <thead>
+        <tr>
+          <th>Salt Destination in China</th>
+          <th>Estimated Share of Total Salt Consumption</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chlor-alkali industry (PVC, caustic soda, chlorine)</td>
+          <td>60–70%</td>
+        </tr>
+        <tr>
+          <td>Glass production</td>
+          <td>10–15%</td>
+        </tr>
+        <tr>
+          <td>Other chemical industries</td>
+          <td>10–15%</td>
+        </tr>
+        <tr>
+          <td>Food-grade salt (human consumption)</td>
+          <td>3–5%</td>
+        </tr>
+        <tr>
+          <td>Livestock, water treatment, and other uses</td>
+          <td>5–10%</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
@@ -268,8 +371,9 @@ let indiaViewActive = false;
 let indiaLayer = null;
 let particles = null;
 let arcEls = []; 
+let worldCountriesFeatureCollection = null; // Guardará o Atlas Mundial unificado
 
-// Faz o pré-carregamento do GeoJSON da Índia assim que possível
+// Faz o pré-carregamento do GeoJSON da Índia assim que possível (mantido como fallback de compatibilidade)
 async function preloadIndiaData() {
   if (cachedIndiaGeoData || isFetchingIndiaData) return;
   isFetchingIndiaData = true;
@@ -311,86 +415,166 @@ function closeChinaPopup() {
   document.getElementById('china-popup').style.display = 'none';
 }
 
-// ════════ ZOOM PARA GUJARAT ════════
+// ════════ ZOOM: EXIBE ÍNDIA E CHINA LADO A LADO ════════
 async function toggleIndiaView() {
   indiaViewActive = !indiaViewActive;
   const svg = d3.select('#world-svg');
   const btn = document.getElementById('btn-india-zoom');
+  const panel = document.getElementById('zoom-panel');
+  
+  // Toggle body class to cleanse/hide pulsing ring waves & frozen global particles
+  document.body.classList.toggle('zoomed-active', indiaViewActive);
   
   if (indiaViewActive) {
     // 1. Esconde mapa base global
     btn.style.background = '#ff0000';
     btn.style.color = 'white';
-    const originalBtnText = btn.innerHTML;
+    btn.innerHTML = '🔍 Global Map';
     
     svg.selectAll('*').filter(function() {
       return this.parentNode && this.parentNode.id === 'world-svg' && this.tagName !== 'defs' && this.id !== 'india-view';
     }).transition().duration(800).attr('opacity', 0);
       
     if (particles) particles.stop();
-    
-    // 2. Constrói Layer da India se não existir
-    if (!indiaLayer) {
-      if (!cachedIndiaGeoData) {
-        btn.innerHTML = '⏳ Loading...';
-        btn.style.pointerEvents = 'none';
-        await preloadIndiaData();
-        btn.innerHTML = originalBtnText;
-        btn.style.pointerEvents = 'auto';
-        
-        if (!cachedIndiaGeoData) {
-            alert("Could not load map data. Please check your connection or ensure 'india_states.geojson' is in the folder.");
-            toggleIndiaView();
-            return;
-        }
-      }
 
+    // Exibe o painel de consumo de sal no centro
+    panel.style.display = 'block';
+    
+    // 2. Constrói a visualização simplificada de Índia e China lado a lado
+    if (!indiaLayer) {
       indiaLayer = svg.append('g').attr('id', 'india-view').attr('opacity', 0);
       
       const W = window.innerWidth, H = window.innerHeight;
-      const indiaProj = d3.geoMercator().scale(W * 1.2).center([82, 23]).translate([W/2, H/2]);
-      const indiaPath = d3.geoPath().projection(indiaProj);
       
-      indiaLayer.selectAll('path')
-        .data(cachedIndiaGeoData.features)
-        .join('path')
-        .attr('d', indiaPath)
-        .attr('stroke', 'rgba(255,255,255,0.4)')
-        .attr('stroke-width', 1)
-        .attr('fill', d => {
-          const stateName = (d.properties.NAME_1 || d.properties.st_nm || d.properties.name || '').toLowerCase();
-          if (stateName.includes('gujarat') || stateName.includes('tamil nadu')) return '#31008a'; 
-          return '#d3bfff'; 
-        });
-        
-      const gujaratCentroid = indiaProj([71.5, 22.8]);
+      // Projeções customizadas para centralizar cada país lateralmente
+      const projIndia = d3.geoMercator().scale(H * 1.1).center([78.9, 20.6]).translate([W * 0.18, H * 0.5]);
+      const projChina = d3.geoMercator().scale(H * 0.75).center([104.2, 35.9]).translate([W * 0.82, H * 0.5]);
       
-      indiaLayer.append('line')
-        .attr('x1', gujaratCentroid[0] - 300)
-        .attr('y1', gujaratCentroid[1])
-        .attr('x2', gujaratCentroid[0])
-        .attr('y2', gujaratCentroid[1])
-        .attr('stroke', '#ff0000')
-        .attr('stroke-width', 2);
+      const pathIndia = d3.geoPath().projection(projIndia);
+      const pathChina = d3.geoPath().projection(projChina);
+      
+      // Encontra geometrias dentro do Atlas carregado globalmente
+      const indiaFeature = worldCountriesFeatureCollection?.features.find(f => f.properties.name === "India");
+      const chinaFeature = worldCountriesFeatureCollection?.features.find(f => f.properties.name === "China");
+      
+      // Desenha Índia
+      if (indiaFeature) {
+        indiaLayer.append('path')
+          .datum(indiaFeature)
+          .attr('d', pathIndia)
+          .attr('stroke', 'rgba(44, 38, 32, 0.4)')
+          .attr('stroke-width', 1.2)
+          .attr('fill', '#ff0000')
+          .attr('opacity', 0.85);
+      }
+      
+      // Desenha China
+      if (chinaFeature) {
+        indiaLayer.append('path')
+          .datum(chinaFeature)
+          .attr('d', pathChina)
+          .attr('stroke', 'rgba(44, 38, 32, 0.4)')
+          .attr('stroke-width', 1.2)
+          .attr('fill', '#2868a8')
+          .attr('opacity', 0.85);
+      }
+      
+      const pIndia = projIndia([78.9, 20.6]);
+      const pChina = projChina([104.2, 35.9]);
+      
+      // Títulos e Labels com Outlines para excelente legibilidade (ÍNDIA)
+      indiaLayer.append('text')
+        .attr('x', pIndia[0])
+        .attr('y', pIndia[1] - 140)
+        .text('INDIA')
+        .attr('fill', '#ff0000')
+        .attr('font-family', 'Playfair Display')
+        .attr('font-weight', '900')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '1.5rem')
+        .attr('stroke', '#f9f2e2')
+        .attr('stroke-width', '5px')
+        .attr('stroke-linejoin', 'round')
+        .attr('paint-order', 'stroke fill');
         
       indiaLayer.append('text')
-        .attr('x', gujaratCentroid[0] - 310)
-        .attr('y', gujaratCentroid[1] + 4)
-        .text('GUJARAT')
-        .attr('fill', '#ff0000')
-        .attr('font-family', 'DM Mono, monospace')
-        .attr('text-anchor', 'end')
-        .attr('font-size', '1rem');
+        .attr('x', pIndia[0])
+        .attr('y', pIndia[1] - 115)
+        .text('Leading Raw Salt Exporter')
+        .attr('fill', '#7a706a')
+        .attr('font-family', 'DM Mono')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '0.75rem')
+        .attr('stroke', '#f9f2e2')
+        .attr('stroke-width', '4px')
+        .attr('stroke-linejoin', 'round')
+        .attr('paint-order', 'stroke fill');
+
+      // Títulos e Labels com Outlines para excelente legibilidade (CHINA)
+      indiaLayer.append('text')
+        .attr('x', pChina[0])
+        .attr('y', pChina[1] - 160)
+        .text('CHINA')
+        .attr('fill', '#2868a8')
+        .attr('font-family', 'Playfair Display')
+        .attr('font-weight', '900')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '1.5rem')
+        .attr('stroke', '#f9f2e2')
+        .attr('stroke-width', '5px')
+        .attr('stroke-linejoin', 'round')
+        .attr('paint-order', 'stroke fill');
+        
+      indiaLayer.append('text')
+        .attr('x', pChina[0])
+        .attr('y', pChina[1] - 135)
+        .text('Primary Salt Importer')
+        .attr('fill', '#7a706a')
+        .attr('font-family', 'DM Mono')
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '0.75rem')
+        .attr('stroke', '#f9f2e2')
+        .attr('stroke-width', '4px')
+        .attr('stroke-linejoin', 'round')
+        .attr('paint-order', 'stroke fill');
+
+      // Linha de Conexão Curva (Fluxo Comercial)
+      const dx = pChina[0] - pIndia[0];
+      const dy = pChina[1] - pIndia[1];
+      const dr = Math.sqrt(dx * dx + dy * dy) * 1.2;
+      const curvePath = `M${pIndia[0]},${pIndia[1]} A${dr},${dr} 0 0,1 ${pChina[0]},${pChina[1]}`;
+
+      // Brilho do fluxo
+      indiaLayer.append('path')
+        .attr('d', curvePath)
+        .attr('stroke', '#ff0000')
+        .attr('stroke-width', 6)
+        .attr('fill', 'none')
+        .attr('opacity', 0.15)
+        .attr('filter', 'url(#af)');
+
+      // Linha tracejada e animada do fluxo
+      indiaLayer.append('path')
+        .attr('d', curvePath)
+        .attr('stroke', '#ff0000')
+        .attr('stroke-width', 2.5)
+        .attr('fill', 'none')
+        .attr('opacity', 0.8)
+        .attr('stroke-dasharray', '6, 6')
+        .attr('class', 'flow-line-animated');
     }
     
-    // Aparece o Layer da Índia
+    // Aparece o Layer de Zoom
     indiaLayer.transition().duration(1000).attr('opacity', 1);
     
   } else {
     // Retorna para Visualização Global
-    btn.innerHTML = '🔍 Zoom Gujarat';
+    btn.innerHTML = 'Zoom';
     btn.style.background = 'rgba(255,255,255,.9)';
     btn.style.color = '#ff0000';
+    
+    // Oculta painel de detalhes no centro
+    panel.style.display = 'none';
     
     if (indiaLayer) indiaLayer.transition().duration(800).attr('opacity', 0);
     
@@ -519,6 +703,7 @@ async function initMap() {
 
   if (topo) {
     const countries = topojson.feature(topo, topo.objects.countries);
+    worldCountriesFeatureCollection = countries; // Armazena recurso mundial para visualização do Zoom
     const borders   = topojson.mesh(topo, topo.objects.countries, (a,b) => a!==b);
 
     // Cor dos países
@@ -639,14 +824,14 @@ async function initMap() {
     const [x,y] = pt;
     const col = CC[dest.c];
     
-    // Group logic to facilitate interactions specifically for interactive target nodes
+    // Agrupa e atribui cursor e clique interativos apenas se for a China
     let g = svg;
     if (dest.c === 'china') {
       g = svg.append('g')
         .attr('cursor', 'pointer')
         .on('click', openChinaPopup);
     }
-
+    
     // Rings
     ['pulse-ring','pulse-ring pulse-ring-2','pulse-ring pulse-ring-3'].forEach(cls => {
       g.append('circle').attr('cx',x).attr('cy',y).attr('r',12)
